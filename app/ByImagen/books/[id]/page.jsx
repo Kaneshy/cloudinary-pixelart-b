@@ -1,5 +1,5 @@
 'use client'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { CldImage } from 'next-cloudinary';
 import { useEffect, useState } from 'react';
 import { IoArrowBackOutline } from "react-icons/io5";
