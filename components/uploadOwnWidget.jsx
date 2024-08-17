@@ -28,18 +28,9 @@ const UploadOwnWidget = ({ isopen, setisopen }) => {
         <form action={createMessage} method="post" encType="multipart/form-data" className="text-white centered-div  flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
             <label className="text-slate-200 font-medium border-b border-slate-400 p-2 text-center"> Add New Post </label>
             <button className='fixed top-2 right-2 p-2 ' onClick={closeWidget}>X</button>
-            <label htmlFor="text" className="text-slate-200 font-medium">
-                tags:
-            </label>
-            <textarea
-                placeholder='anime,music,cover'
-                id="text"
-                name="text"
-                className="border-2 border-slate-300 rounded-md p-2 text-black focus:ring-2 focus:ring-blue-400"
-            />
 
-            <label className="text-slate-200 font-medium">
-                Upload Image
+            <label  htmlFor="image"  className="text-slate-200 font-medium">
+                Upload Image:
             </label>
             <label htmlFor="image" className="text-center mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
                 Select from computer
@@ -59,6 +50,17 @@ const UploadOwnWidget = ({ isopen, setisopen }) => {
                 </div>
             )}
 
+            <label htmlFor="text" className="text-slate-200 font-medium">
+                tags:
+            </label>
+            <textarea
+                placeholder='anime,music,cover'
+                id="text"
+                name="text"
+                className="border-2 min-h-8 border-slate-300 rounded-md p-2 text-black focus:ring-2 focus:ring-blue-400"
+            />
+
+
             <button
                 type="submit"
                 className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
@@ -67,6 +69,7 @@ const UploadOwnWidget = ({ isopen, setisopen }) => {
                 Create
             </button>
         </form>
+
     );
 };
 

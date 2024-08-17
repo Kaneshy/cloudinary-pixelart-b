@@ -13,7 +13,7 @@ const UploadPage = async () => {
     }
 
     return (
-        <div>
+        <div className='p-4 bg-blue-400'>
             {userInfo ? (
                 <div>{/* Render userInfo content here */}</div>
             ) : (

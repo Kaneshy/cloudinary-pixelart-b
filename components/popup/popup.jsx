@@ -8,18 +8,21 @@ const PopUpOpener = () => {
 
     const [isopen, setisopen] = useState(false)
 
-    
+
 
     return (
-        <main className='fixed bottom-4 right-4 '>
-            <div>
-                <button className=' p-4 bg-slate-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
-                <IoMdCloudUpload size={'26'} />
-                </button>
-                
+        <main>
+            <div className='fixed bottom-4 right-4 '>
+                <div>
+                    <button className=' p-4 bg-slate-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
+                        <IoMdCloudUpload size={'26'} />
+                    </button>
+
+                </div>
             </div>
+
             {isopen && (
-                <UploadOwnWidget isopen={isopen} setisopen={setisopen}/>
+                <UploadOwnWidget isopen={isopen} setisopen={setisopen} />
             )
 
             }

@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const NavbarPage = () => {
 
-    const array1 = ['anime', 'books']
+    const array1 = ['All', 'anime', 'books', 'drawing']
 
     return (
         <main>

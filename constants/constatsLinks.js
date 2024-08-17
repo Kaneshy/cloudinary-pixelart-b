@@ -2,7 +2,7 @@ export const constatsLinks = [
     {
         title:'Images',
         desc:'Social Media, video uploader, img uploader...',
-        link:'/categorie/images',
+        link:'/categorie/All',
         imgUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1706203166/FASHION/Screenshot_2024-01-25_120109_iwth0j.jpg'
     },
     {

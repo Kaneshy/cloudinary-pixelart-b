@@ -42,6 +42,10 @@ body {
   transform: translate(-50%, -50%);
   background-color: #262626;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 90%; /* Prevents the div from exceeding the viewport height */
+  max-width: 90%;  /* Prevents the div from exceeding the viewport width */
+  overflow-y: auto; /* Enables vertical scrolling if content overflows */
+  overflow-x: hidden; /* Optionally hide horizontal scrolling */
 }
 
 .input-file {
@@ -98,4 +102,31 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   margin: 0 auto;
   gap: 20px;
+}
+
+
+
+
+/* Style the scrollbar track (background) */
+.centered-div::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+/* Style the scrollbar thumb (handle) */
+.centered-div::-webkit-scrollbar-thumb {
+  background-color: #4b5563; /* Dark gray */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #262626; /* Padding around the thumb */
+}
+
+/* Style the scrollbar track (background) */
+.centered-div::-webkit-scrollbar-track {
+  background-color: #262626; /* Background color of the track */
+  border-radius: 10px;
+}
+
+
+/* Optional: Hover effect on scrollbar thumb */
+.centered-div::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af; /* Lighter gray on hover */
 }

@@ -2,13 +2,14 @@
 import { FetchImagesbyTags } from '@/lib/actions/upload.actions';
 import { CldImage } from 'next-cloudinary';
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
-const CategoriePage = ({params}) => {
+const CategoriePage = ({ params }) => {
     const [images, setImages] = useState([]);
 
     useEffect(() => {
         async function FetchImages() {
-            const result = await FetchImagesbyTags(params.id);
+            const result = await FetchImagesbyTags({tag: params.id});
             setImages(result.props.publicId); // Store the result in the component state
         }
         FetchImages()
@@ -21,17 +22,20 @@ const CategoriePage = ({params}) => {
             </form> */}
 
             <section className='hp-container mt-36'>
-                <div className='pm-grid-container'>
+                <div className='pm-grid-container' >
                     {images && images.map((pId, index) => (
-                        <div key={index} className='img-content'>
+                        <Link href={`/ByImagen/${pId}`} key={index} className='img-content'   >
+                            {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
                             <CldImage
                                 width="250"
                                 height="300"
+                                crop="fill"
+                                sizes="100vw"
                                 src={pId}
-                                alt={`Image ${index}`}
+                                alt="Description of my image"
                                 priority={false}
                             />
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </section>
