@@ -8,7 +8,7 @@ export const constatsLinks = [
     {
         title:'Videos',
         desc:'compilation of the best websites',
-        link:'/categorie/Videos',
+        link:'/categorieVideo/All',
         imgUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1708287656/FASHION/Screenshot_2024-02-18_152044_ybetp7.jpg'
     },
     {

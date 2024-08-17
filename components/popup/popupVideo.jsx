@@ -1,10 +1,11 @@
 'use client'
-import UploadOwnWidget from '@/components/uploadOwnWidget'
 import React, { useState } from 'react'
-import { FaImage } from "react-icons/fa";
+import { IoMdCloudUpload } from "react-icons/io";
+import UploadVideoWidget from '../uploadVideoWidget';
+import { RiVideoAddFill } from "react-icons/ri";
 
 
-const PopUpOpener = () => {
+const PopUpOpenerVideo = () => {
 
     const [isopen, setisopen] = useState(false)
 
@@ -12,17 +13,17 @@ const PopUpOpener = () => {
 
     return (
         <main>
-            <div className='fixed bottom-4 right-4 '>
+            <div className='fixed bottom-20 right-4 '>
                 <div>
                     <button className=' p-4 bg-slate-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
-                        <FaImage  size={'26'} />
+                        <RiVideoAddFill  size={'26'} />
                     </button>
 
                 </div>
             </div>
 
             {isopen && (
-                <UploadOwnWidget isopen={isopen} setisopen={setisopen} />
+                <UploadVideoWidget isopen={isopen} setisopen={setisopen} />
             )
 
             }
@@ -30,4 +31,4 @@ const PopUpOpener = () => {
     )
 }
 
-export default PopUpOpener
+export default PopUpOpenerVideo

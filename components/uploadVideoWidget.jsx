@@ -1,9 +1,9 @@
 'use client';
 
-import { createMessage } from '@/lib/actions/upload.actions';
+import { uploadVideo } from '@/lib/actions/video.actions';
 import React, { useState } from 'react';
 
-const UploadOwnWidget = ({ isopen, setisopen }) => {
+const UploadVideoWidget = ({ isopen, setisopen }) => {
     const [selectedFile, setSelectedFile] = useState(null);
     const [preview, setPreview] = useState(null);
 
@@ -25,28 +25,28 @@ const UploadOwnWidget = ({ isopen, setisopen }) => {
     }
 
     return (
-        <form action={createMessage} method="post" encType="multipart/form-data" className="text-white centered-div  flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
-            <label className="text-slate-200 font-medium border-b border-slate-400 p-2 text-center"> Upload New Image </label>
+        <form action={uploadVideo} method="post" encType="multipart/form-data" className="text-white centered-div  flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
+            <label className="text-slate-200 font-medium border-b border-slate-400 p-2 text-center"> Upload New Video </label>
             <button className='fixed top-2 right-2 p-2 ' onClick={closeWidget}>X</button>
 
-            <label  htmlFor="image"  className="text-slate-200 font-medium">
-                Upload Image:
+            <label  htmlFor="video"  className="text-slate-200 font-medium">
+                Upload Video:
             </label>
-            <label htmlFor="image" className="text-center mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+            <label htmlFor="video" className="text-center mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
                 Select from computer
             </label>
             <input
                 type="file"
-                id="image"
-                name="image"
-                accept="image/*"
+                id="video"
+                name="video"
+                accept="video/*"
                 onChange={handleFileChange}
                 className="input-file"
             />
 
             {preview && (
                 <div className="mt-4">
-                    <img src={preview} alt="Selected Image Preview" className="w-full h-auto rounded-md shadow-sm" />
+                    <video src={preview} controls className="w-full h-auto rounded-md shadow-sm" />
                 </div>
             )}
 
@@ -60,7 +60,6 @@ const UploadOwnWidget = ({ isopen, setisopen }) => {
                 className="border-2 min-h-8 border-slate-300 rounded-md p-2 text-black focus:ring-2 focus:ring-blue-400"
             />
 
-
             <button
                 type="submit"
                 className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
@@ -69,8 +68,7 @@ const UploadOwnWidget = ({ isopen, setisopen }) => {
                 Create
             </button>
         </form>
-
     );
 };
 
-export default UploadOwnWidget;
+export default UploadVideoWidget;

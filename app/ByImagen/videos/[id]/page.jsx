@@ -1,0 +1,66 @@
+'use client'
+import { redirect, useRouter } from 'next/navigation'
+import { CldImage } from 'next-cloudinary';
+import { useEffect, useState } from 'react';
+import { IoArrowBackOutline } from "react-icons/io5";
+import { FetchSingleVideo } from '@/lib/actions/video.actions';
+import { MdDelete } from "react-icons/md";
+
+
+
+
+const ImgTarjet = ({ params }) => {
+    const router = useRouter()
+
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        async function FetchVideo() {
+            const result = await FetchSingleVideo({ tag: `videos/${params.id}` });
+            setImages(result.props.publicIdAndUrls); // Store the result in the component state
+        }
+        FetchVideo()
+    }, [])
+
+    const deleteImage = async () => {
+        const res = await DeleteImagebyPublicId({ publicIdA: `books/${params.id}` })
+        if (res.result == 'ok') {
+            router.push('/categorie/All')
+        } else {
+            console.log('Error at deleting request')
+        }
+        console.log(res.result)
+    }
+
+    return (
+        <>
+            <main>
+                <div className='it-container flex  justify-center ' >
+                    {images && (
+                        <div className=' max-w-2xl it-b-container w-full flex justify-center max-h-screen  p-4' >
+                            <video src={images} controls autoPlay></video>
+                        </div>
+                    )}
+
+
+                </div>
+                <section className='p-4 flex justify-start items-start text-start'>
+                    <div className='w-full rounded-2xl p-4 bg-zinc-900 '>
+                        <button className='p-2 rounded-full bg-zinc-800 hover:bg-red-700' onClick={deleteImage}>
+                            <MdDelete />
+                        </button>
+                    </div>
+                </section>
+
+            </main>
+
+
+            <div onClick={() => router.back()} className='fixed hover:bg-slate-500 top-40 left-4 p-2 bg-slate-900 rounded-full' >
+                <IoArrowBackOutline size={24} />
+            </div>
+        </>
+
+    )
+}
+
+export default ImgTarjet

@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import NavbarPage from "@/components/ui/navbar";
 import PopUpOpener from "@/components/popup/popup";
+import PopUpOpenerVideo from "@/components/popup/popupVideo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <NavbarPage/>
         {children}
         <PopUpOpener/>
+        <PopUpOpenerVideo/>
         
         </body>
     </html>

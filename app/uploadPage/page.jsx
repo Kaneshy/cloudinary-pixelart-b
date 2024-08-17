@@ -16,7 +16,7 @@ const UploadPage = () => {
                 <button className='p-2 bg-blue-600' onClick={() => setisopen(!isopen)}>upload</button>
             </div>
             {isopen && (
-                <UploadOwnWidget isopen={isopen} setisopen={setisopen}/>
+                <OptionsVideoImage isopen={isopen} setisopen={setisopen}/>
             )
 
             }
