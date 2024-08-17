@@ -24,7 +24,7 @@ const CategoriePage = ({ params }) => {
             <section className='hp-container mt-36'>
                 <div className='pm-grid-container' >
                     {images && images.map((pId, index) => (
-                        <Link href={`/ByImagen/${pId}`} key={index} className='img-content'   >
+                        <Link href={`/ByImagen/${pId}`} key={index} className=' img-content'   >
                             {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
                             <CldImage
                                 width="250"
