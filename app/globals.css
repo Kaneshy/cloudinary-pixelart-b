@@ -85,6 +85,14 @@ body {
   background: #0e0e0e;
 }
 
+.loader-container  {
+  min-width: 100%;
+  min-height: 300px;
+  object-fit: contain;
+  border-radius: 10px;
+  background: #0e0e0e;
+}
+
 
 .hp-container {
   min-height: 100vh;

@@ -9,7 +9,7 @@ const StartPage = () => {
         <main className='w-full  text-white'>
             <div className='p-6'>
                 <div className='select-none py-10'>
-                    <div className='flex justify-center  '>
+                    <div className='flex justify-center   '>
                         <img className='rounded-xl mt-10 mb-10 shadow-[0_20px_50px_rgba(111,_113,_230,_0.5)]' src="https://res.cloudinary.com/dh01ngdjo/image/upload/v1708120673/FASHION/douma-demon-slayer_xlslp4.gif" alt="" />
                     </div>
 
