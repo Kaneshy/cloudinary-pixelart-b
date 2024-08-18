@@ -1,7 +1,7 @@
 'use client'
 import { FetchVideosbyTags } from '@/lib/actions/video.actions';
 import { CldImage } from 'next-cloudinary';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { IoMdPlay } from "react-icons/io";
 
@@ -13,7 +13,6 @@ const CategorieVideoPage = ({ params }) => {
         async function FetchImages() {
             const result = await FetchVideosbyTags({ tag: params.id });
             setImages(result.props.publicIdAndUrls); // Store the result in the component state
-            console.log(result)
         }
         FetchImages()
     }, [params])
@@ -23,8 +22,7 @@ const CategorieVideoPage = ({ params }) => {
             {/* <form action={create}>
                 <button type="submit">upload</button>
             </form> */}
-
-            <section className='hp-container mt-36 select-none'>
+            <section className='hp-container p-4 select-none'>
                 <div className='pm-grid-container' >
                     {images && images.map((pId, index) => (
                         <Link href={`/ByImagen/${pId.public_id}`} key={index} className='relative hover:blur-sm flex items-center justify-center img-content'   >
@@ -36,6 +34,7 @@ const CategorieVideoPage = ({ params }) => {
                     ))}
                 </div>
             </section>
+
         </div>
     );
 };

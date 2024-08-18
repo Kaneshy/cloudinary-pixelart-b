@@ -25,7 +25,7 @@ const UploadVideoWidget = ({ isopen, setisopen }) => {
     }
 
     return (
-        <form action={uploadVideo} method="post" encType="multipart/form-data" className="text-white centered-div  flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
+        <form action={uploadVideo} encType="multipart/form-data" className="text-white centered-div  flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
             <label className="text-slate-200 font-medium border-b border-slate-400 p-2 text-center"> Upload New Video </label>
             <button className='fixed top-2 right-2 p-2 ' onClick={closeWidget}>X</button>
 

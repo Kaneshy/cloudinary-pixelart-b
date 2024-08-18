@@ -1,26 +1,15 @@
 export const constatsLinks = [
     {
         title:'Images',
-        desc:'Social Media, video uploader, img uploader...',
+        desc:'Imagenes, gits, etc.',
         link:'/categorie/All',
-        imgUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1706203166/FASHION/Screenshot_2024-01-25_120109_iwth0j.jpg'
+        imgUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1723946705/pdfreader/c3fuwlthehuy4lwdejpq.webp'
+        
     },
     {
         title:'Videos',
-        desc:'compilation of the best websites',
+        desc:'Videos, shorts, etc.',
         link:'/categorieVideo/All',
-        imgUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1708287656/FASHION/Screenshot_2024-02-18_152044_ybetp7.jpg'
-    },
-    {
-        title:'Music',
-        desc:'any subject',
-        link:'/categorie/Music',
-        imgUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1708288034/FASHION/ff152557_ugec9t.jpg'
-    },
-    {
-        title:'Books',
-        desc:'any subject',
-        link:'/categorie/Books',
-        imgUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1708288034/FASHION/ff152557_ugec9t.jpg'
+        imgUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1723946539/pdfreader/t4mfl8ymmgawsuvjpfmr.gif'
     }
 ]

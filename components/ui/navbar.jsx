@@ -9,7 +9,7 @@ const NavbarPage = () => {
     return (
         <main className='select-none'>
             <nav className='w-full flex p-4'>
-                <Link href='/Start' className='flex-1 text-lg font-bold'>PIXELART</Link>
+                <Link href='/' className='flex-1 text-lg font-bold'>PIXELART</Link>
                 <div className='flex gap-4 text-sm justify-end items-end'>
                     <Link href={'/categorie/All'} className='py-2 px-4 rounded-xl  hover:bg-zinc-700'>IMAGES</Link>
                     <Link href={'/categorieVideo/All'} className='py-2 px-4  rounded-xl  hover:bg-zinc-700'>VIDEOS</Link>

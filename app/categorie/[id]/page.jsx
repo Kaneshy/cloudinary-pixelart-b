@@ -21,7 +21,7 @@ const CategoriePage = ({ params }) => {
                 <button type="submit">upload</button>
             </form> */}
 
-            <section className='hp-container mt-36'>
+            <section className='hp-container p-4'>
                 <div className='pm-grid-container' >
                     {images && images.map((pId, index) => (
                         <Link href={`/ByImagen/${pId}`} key={index} className=' img-content'   >

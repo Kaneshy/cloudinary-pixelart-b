@@ -15,12 +15,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavbarPage/>
-        {children}
-        <PopUpOpener/>
-        <PopUpOpenerVideo/>
-        
-        </body>
+        <main className="flex flex-col ">
+          <nav>
+            <NavbarPage />
+          </nav>
+          {children}
+          <PopUpOpener />
+          <PopUpOpenerVideo />
+        </main>
+
+      </body>
     </html>
   );
 }

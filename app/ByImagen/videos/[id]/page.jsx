@@ -3,7 +3,7 @@ import { redirect, useRouter } from 'next/navigation'
 import { CldImage } from 'next-cloudinary';
 import { useEffect, useState } from 'react';
 import { IoArrowBackOutline } from "react-icons/io5";
-import { FetchSingleVideo } from '@/lib/actions/video.actions';
+import { DeleteVideobyPublicId, FetchSingleVideo } from '@/lib/actions/video.actions';
 import { MdDelete } from "react-icons/md";
 
 
@@ -23,9 +23,9 @@ const ImgTarjet = ({ params }) => {
     }, [])
 
     const deleteImage = async () => {
-        const res = await DeleteImagebyPublicId({ publicIdA: `books/${params.id}` })
+        const res = await DeleteVideobyPublicId({ publicIdA: `videos/${params.id}` })
         if (res.result == 'ok') {
-            router.push('/categorie/All')
+            router.push('/categorieVideo/All')
         } else {
             console.log('Error at deleting request')
         }
