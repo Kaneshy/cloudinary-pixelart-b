@@ -34,7 +34,7 @@ const ImgTarjet = ({ params }) => {
         <>
             {preloadingA && (
                 <main>
-                    <div className='it-container flex  justify-center ' >
+                    <div className='it-container select-none flex  justify-center ' >
                         <div className=' max-w-2xl it-b-container w-full flex justify-center max-h-screen  p-4' >
                             <CldImage
                                 width="1000"
@@ -43,7 +43,7 @@ const ImgTarjet = ({ params }) => {
                                 sizes="100vw"
                                 alt="Description of my image"
                                 priority={true}
-                                className=' '
+                                
                             />
                         </div>
 
@@ -60,7 +60,7 @@ const ImgTarjet = ({ params }) => {
 
 
             )}
-            <div onClick={() => router.push('/categorie/All')?.reload()} className='fixed hover:bg-slate-500 top-40 left-4 p-2 bg-slate-900 rounded-full' >
+            <div onClick={() => router.back()} className='fixed hover:bg-slate-500 top-40 left-4 p-2 bg-zinc-900 rounded-full' >
                 <IoArrowBackOutline size={24} />
             </div>
         </>

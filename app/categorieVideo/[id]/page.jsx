@@ -29,6 +29,11 @@ const CategorieVideoPage = ({ params }) => {
     }, [])
 
     const fetchVideos = async () => {
+
+        if (totalCountS === null) {
+            return
+        }
+
         let countOfTen = Math.floor(totalCountS / 20); // Calculate how many times 10 fits into the number
         let remainder = totalCountS % 20; // Calculate the remainder
         if (page < countOfTen) {

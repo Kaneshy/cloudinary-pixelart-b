@@ -18,20 +18,28 @@ const CategoriePage = ({ params }) => {
         async function FetchImages() {
             const result = await FetchImagesbyTags({ tag: params.id, nCursor: null, maxResults: 20, });
             setImages(result.props.publicId); // Store the result in the component state
+            console.log('tcound', result.props.totalCount)
             settotalCountS(result.props.totalCount)
             if (result.props.nextCursor) {
                 setCursor(result.props.nextCursor)
             }
         }
         FetchImages()
-    }, [params])
+    }, [])
 
     const fetchVideos = async () => {
+        console.log('fetchvideos')
+        console.log(page, totalCountS)
+
+        if (totalCountS === null) {
+            return
+        }
 
         let countOfTen = Math.floor(totalCountS / 20); // Calculate how many times 10 fits into the number
         let remainder = totalCountS % 20; // Calculate the remainder
 
         if (page < countOfTen) {
+            console.log('if')
             try {
                 const result = await FetchImagesbyTags({ tag: params.id, nCursor: cursor, maxResults: 20 });
                 setImages((prevPosts) => [...prevPosts, ...result.props.publicId]);
@@ -45,6 +53,7 @@ const CategoriePage = ({ params }) => {
                 console.error('Error fetching videos:', error);
             }
         } else if (page == countOfTen) {
+            console.log('else if')
             const result = await FetchImagesbyTags({ tag: params.id, nCursor: cursor, maxResults: 20 + remainder });
             // const processedImages = result.props.publicId.slice(20);
             setImages((prevPosts) => [...prevPosts, ...result.props.publicId]);

@@ -36,7 +36,7 @@ const ImgTarjet = ({ params }) => {
 
     return (
         <>
-            <main>
+            <main className='select-none'>
                 <div className=' flex  justify-center ' >
                     {images && (
 
@@ -47,6 +47,14 @@ const ImgTarjet = ({ params }) => {
                                 src={`videos/${params.id}`}
                                 autoplay={true}
                                 pictureInPictureToggle
+                                colors={{
+                                    accent: '#5d0577'
+                                }}
+                                logo={{
+                                    imageUrl:'https://res.cloudinary.com/dh01ngdjo/image/upload/v1724084500/Postafolio/ln8q7swr3oha19shdpwu.png',
+                                    // imageUrl: '<Your Image URL',
+                                    onClickUrl: 'https://cloudinary-pixelart.vercel.app/'
+                                  }}
                             />
                         </div>
                     )}
@@ -73,7 +81,7 @@ const ImgTarjet = ({ params }) => {
             </main>
 
 
-            <div onClick={() => router.push('/categorieVideo/All')?.reload()} className='fixed hover:bg-slate-500 top-40 left-4 p-2 bg-slate-900 rounded-full' >
+            <div onClick={() => router.back()} className='fixed hover:bg-slate-500 top-40 left-4 p-2 bg-zinc-900 rounded-full' >
                 <IoArrowBackOutline size={24} />
             </div>
         </>
