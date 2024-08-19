@@ -138,3 +138,81 @@ body {
 .centered-div::-webkit-scrollbar-thumb:hover {
   background-color: #9ca3af; /* Lighter gray on hover */
 }
+
+.tv-background {
+  background-image: url('https://res.cloudinary.com/dh01ngdjo/image/upload/v1723992504/test1/pfujybzghp8qx55ucnye.jpg'); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blurred-text {
+  color: white;
+  font-size: 1em;
+  opacity: 0.7; /* Reduce opacity */
+  filter: blur(1px); /* Apply slight blur */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Optional: add a text shadow for better visibility */
+}
+
+
+.tv-container {
+  width: 300px; /* Adjust the size of the TV container */
+  height: 250px; /* Adjust the height of the TV container */
+  background: #333; /* Dark background to mimic an old TV case */
+  border-radius: 15px; /* Rounded corners for a retro look */
+  box-shadow: inset 0 0 10px #000, 0 10px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  padding: 10px;
+  position: relative;
+}
+
+.tv-screen {
+  width: 100%;
+  height: 75%; /* Adjust the height for the screen portion */
+  background-color: #111; /* Dark background to mimic an old screen */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Hide any overflow from the video */
+}
+
+.tv-video {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px; /* Matches the screen's border-radius */
+  object-fit: cover; /* Ensure the video covers the entire screen area */
+}
+
+.tv-buttons {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.tv-button {
+  width: 30px;
+  height: 30px;
+  background: #444; /* Button color */
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 4px #222; /* 3D effect */
+  cursor: pointer;
+}
+
+
+.tv-button:active {
+  box-shadow: 0 2px #111; /* Pressed effect */
+  transform: translateY(2px); /* Pressed effect */
+}
+
+.gradient-text {
+  background: linear-gradient(to top, #800080, #e0b3ff); /* From dark purple to light purple */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
