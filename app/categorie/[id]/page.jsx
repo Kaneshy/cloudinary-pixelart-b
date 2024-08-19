@@ -32,7 +32,6 @@ const CategoriePage = ({ params }) => {
         let remainder = totalCountS % 20; // Calculate the remainder
 
         if (page < countOfTen) {
-            console.log('if')
             try {
                 const result = await FetchImagesbyTags({ tag: params.id, nCursor: cursor, maxResults: 20 });
                 setImages((prevPosts) => [...prevPosts, ...result.props.publicId]);
@@ -46,7 +45,6 @@ const CategoriePage = ({ params }) => {
                 console.error('Error fetching videos:', error);
             }
         } else if (page == countOfTen) {
-            console.log('else if')
             const result = await FetchImagesbyTags({ tag: params.id, nCursor: cursor, maxResults: 20 + remainder });
             // const processedImages = result.props.publicId.slice(20);
             setImages((prevPosts) => [...prevPosts, ...result.props.publicId]);

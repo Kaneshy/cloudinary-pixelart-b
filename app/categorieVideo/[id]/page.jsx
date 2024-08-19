@@ -5,7 +5,6 @@ import React, { Suspense, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { IoMdPlay } from "react-icons/io";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { usePathname } from 'next/navigation'
 
 
 const CategorieVideoPage = ({ params }) => {
@@ -15,17 +14,12 @@ const CategorieVideoPage = ({ params }) => {
     const [cursor, setCursor] = useState(null)
     const [totalCountS, settotalCountS] = useState(null)
     const [pathN, setpathN] = useState('')
-    const pathname = usePathname()
 
     useEffect(() => {
-        const lastPart = pathname.split('/').pop()
-        console.log(lastPart)
 
         async function FetchImages() {
-            const result = await FetchVideosbyTags({ tag: lastPart, nCursor: null, maxResults: 20});
+            const result = await FetchVideosbyTags({ tag: params.id, nCursor: null, maxResults: 20});
             setImages(result.props.propsB); // Store the result in the component state
-            console.log(result)
-            console.log(result.props.propsB)
             settotalCountS(result.props.totalCount)
             if (result.props.nextCursor) {
                 setCursor(result.props.nextCursor)
@@ -35,12 +29,9 @@ const CategorieVideoPage = ({ params }) => {
     }, [])
 
     const fetchVideos = async () => {
-        console.log('running fetchVideos')
         let countOfTen = Math.floor(totalCountS / 20); // Calculate how many times 10 fits into the number
         let remainder = totalCountS % 20; // Calculate the remainder
-
         if (page < countOfTen) {
-            console.log('if')
             try {
                 const result = await FetchVideosbyTags({ tag: params.id, nCursor: cursor, maxResults: 20 });
                 setImages((prevPosts) => [...prevPosts, ...result.props.propsB]);
@@ -54,8 +45,8 @@ const CategorieVideoPage = ({ params }) => {
                 console.error('Error fetching videos:', error);
             }
         } else if (page == countOfTen) {
-            console.log('else if')
             const result = await FetchVideosbyTags({ tag: params.id, nCursor: cursor, maxResults: 20 + remainder });
+            console.log(result)
             // const processedImages = result.props.publicId.slice(20);
             setImages((prevPosts) => [...prevPosts, ...result.props.propsB]);
             setPage((prevPage) => prevPage + 1);
