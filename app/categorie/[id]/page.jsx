@@ -14,7 +14,7 @@ const CategoriePage = ({ params }) => {
     const [totalCountS, settotalCountS] = useState(null)
 
     useEffect(() => {
-        console.log(params.id)
+        console.log('rjds', params.id)
         async function FetchImages() {
             const result = await FetchImagesbyTags({ tag: params.id, nCursor: null, maxResults: 20, });
             setImages(result.props.publicId); // Store the result in the component state
@@ -24,7 +24,7 @@ const CategoriePage = ({ params }) => {
             }
         }
         FetchImages()
-    }, [])
+    }, [params])
 
     const fetchVideos = async () => {
 

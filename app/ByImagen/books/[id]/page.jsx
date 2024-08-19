@@ -60,7 +60,7 @@ const ImgTarjet = ({ params }) => {
 
 
             )}
-            <div onClick={() => router.back()} className='fixed hover:bg-slate-500 top-40 left-4 p-2 bg-slate-900 rounded-full' >
+            <div onClick={() => router.push('/categorie/All')?.reload()} className='fixed hover:bg-slate-500 top-40 left-4 p-2 bg-slate-900 rounded-full' >
                 <IoArrowBackOutline size={24} />
             </div>
         </>

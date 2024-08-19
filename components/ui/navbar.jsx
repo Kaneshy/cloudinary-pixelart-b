@@ -9,7 +9,7 @@ const NavbarPage = () => {
     const pathname = usePathname()
 
     const array1 = ['All', 'anime', 'books', 'drawing']
-    const VideosArray = ['All', 'music', 'trailer', 'anime', 'books']
+    const VideosArray = ['All', 'music', 'nature', 'IRL', 'comedy', 'learning', 'film', 'animation', 'retro']
     const [pathN, setpathN] = useState('')
     const [ArraySelected, setArraySelected] = useState([])
 

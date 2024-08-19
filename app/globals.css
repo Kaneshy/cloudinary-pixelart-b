@@ -216,3 +216,8 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.max-w-80 {
+  width: 80%;
+}
+
