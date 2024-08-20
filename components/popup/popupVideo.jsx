@@ -13,10 +13,10 @@ const PopUpOpenerVideo = () => {
 
     return (
         <main>
-            <div className='fixed bottom-20 right-4 '>
+            <div className='fixed bottom-2 right-20 '>
                 <div>
-                    <button className=' p-4 bg-slate-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
-                        <RiVideoAddFill  size={'26'} />
+                    <button className=' p-4 bg-zinc-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
+                        <RiVideoAddFill  size={'24'} />
                     </button>
 
                 </div>

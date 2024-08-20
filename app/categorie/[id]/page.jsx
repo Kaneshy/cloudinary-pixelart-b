@@ -82,12 +82,11 @@ const CategoriePage = ({ params }) => {
                 <section className='hp-container p-4'>
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
-                            <Link href={`/ByImagen/${pId}`} key={index} className=' img-content'   >
+                            <Link href={`/ByImagen/${pId}`} target='_blank' key={index} className=' img-content'   >
                                 {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
                                 <CldImage
                                     width="250"
                                     height="300"
-                                    crop="fill"
                                     sizes="100vw"
                                     src={pId}
                                     alt="Description of my image"

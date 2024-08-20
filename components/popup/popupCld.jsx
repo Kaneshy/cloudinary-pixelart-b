@@ -14,10 +14,10 @@ const PopUpOpenerCdl = () => {
 
     return (
         <main>
-            <div className='fixed bottom-36  right-4 '>
+            <div className='fixed bottom-2  right-36 '>
                 <div>
-                    <button className=' p-4 bg-slate-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
-                        <GrMultiple   size={'26'} />
+                    <button className=' p-4 bg-zinc-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
+                        <GrMultiple   size={'24'} />
                     </button>
 
                 </div>
