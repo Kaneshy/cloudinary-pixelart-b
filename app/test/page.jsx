@@ -1,5 +1,6 @@
 'use client';
 
+import UploadWidgetCdl from '@/components/widget/UploadWidget';
 import { createMessage } from '@/lib/actions/upload.actions';
 import React, { useState } from 'react';
 
@@ -21,6 +22,11 @@ const TestPage = () => {
     };
 
     return (
+        <main>
+
+        <UploadWidgetCdl/>
+
+
         <form action={createMessage} method="post" encType="multipart/form-data" className="flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
             <label htmlFor="text" className="text-slate-700 font-medium">
                 tags:
@@ -56,6 +62,9 @@ const TestPage = () => {
                 Create
             </button>
         </form>
+
+        </main>
+
     );
 };
 

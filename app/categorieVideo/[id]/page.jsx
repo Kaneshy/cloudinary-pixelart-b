@@ -80,7 +80,7 @@ const CategorieVideoPage = ({ params }) => {
                 <section className='hp-container p-4 select-none'>
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
-                            <Link href={`/ByImagen/${pId.public_id}`} key={index} className='relative hover:blur-sm flex items-center justify-center img-content'   >
+                            <Link href={`/ByVideo/${pId.public_id}`} key={index} className='relative hover:blur-sm flex items-center justify-center img-content'   >
                                 <img loading='lazy' src={pId.secure_url} alt={`Imagen ${index}`} />
                                 <div className='absolute rounded-full blur-none p-2'>
                                     <IoMdPlay size={24} />

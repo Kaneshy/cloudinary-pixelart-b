@@ -133,11 +133,41 @@ body {
   border-radius: 10px;
 }
 
-
 /* Optional: Hover effect on scrollbar thumb */
 .centered-div::-webkit-scrollbar-thumb:hover {
   background-color: #9ca3af; /* Lighter gray on hover */
 }
+
+
+
+
+
+.centered-bar::-webkit-scrollbar {
+  height: 12px; /* Width of the scrollbar */
+}
+
+/* Style the scrollbar thumb (handle) */
+.centered-bar::-webkit-scrollbar-thumb {
+  background-color: #000000; /* Dark gray */
+  border-radius: 10px; /* Rounded corners */
+  border: 3px solid #000000; /* Padding around the thumb */
+}
+
+/* Style the scrollbar track (background) */
+.centered-bar::-webkit-scrollbar-track {
+  background-color: #141414; /* Background color of the track */
+  border-radius: 10px;
+}
+
+
+/* Optional: Hover effect on scrollbar thumb */
+.centered-bar::-webkit-scrollbar-thumb:hover {
+  background-color: #000000; /* Lighter gray on hover */
+}
+
+
+
+
 
 .tv-background {
   background-image: url('https://res.cloudinary.com/dh01ngdjo/image/upload/v1723992504/test1/pfujybzghp8qx55ucnye.jpg'); /* Replace with your image URL */
@@ -221,3 +251,37 @@ body {
   width: 80%;
 }
 
+.d {
+  background-color: #5d0577;
+}
+
+
+
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-height: 780px;
+}
+
+.border-a1 {
+  border-bottom: 1px solid rgb(63, 63, 63);
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  object-fit: contain;
+  max-height: 780px; 
+
+}
+
+.header-max-h {
+  max-height: 780px;
+  overflow: hidden;
+}

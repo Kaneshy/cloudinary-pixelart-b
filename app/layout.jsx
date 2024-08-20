@@ -3,6 +3,7 @@ import "./globals.css";
 import NavbarPage from "@/components/ui/navbar";
 import PopUpOpener from "@/components/popup/popup";
 import PopUpOpenerVideo from "@/components/popup/popupVideo";
+import PopUpOpenerCdl from "@/components/popup/popupCld";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
             <NavbarPage />
           </nav>
           {children}
+          <PopUpOpenerCdl/>
           <PopUpOpener />
           <PopUpOpenerVideo />
         </main>

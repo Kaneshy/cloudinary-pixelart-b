@@ -31,7 +31,7 @@ const NavbarPage = () => {
     }, [pathname])
 
     return (
-        <main className='select-none'>
+        <main className='select-none mb-4'>
             <nav className='w-full flex p-4'>
                 <div className='flex-1'>
                     <Link href='/' className='gradient-text flex-1 text-xl font-bold'>PIXELART</Link>
@@ -41,7 +41,7 @@ const NavbarPage = () => {
                     <Link href={'/categorieVideo/All'} className='py-2 px-4  rounded-xl hover:text-purple-700   '>VIDEOS</Link>
                 </div>
             </nav>
-            <div className='flex p-2 bg-zinc-950 select-none flex-row gap-4 items-center justify-center'>
+            <div className='flex p-2 overflow-x-auto centered-bar bg-zinc-950 select-none flex-row gap-4 items-center justify-center'>
                 {ArraySelected.map((x, index) => (
                     <Link href={`/categorie${pathN + x}`} className='transition text-zinc-400 duration-300 ease-in-out transform hover:text-purple-700  hover:scale-105  bg-black rounded-xl' key={index}>
                         <div className=' px-4 py-1 rounded-lg '>
