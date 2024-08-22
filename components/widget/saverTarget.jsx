@@ -1,46 +1,117 @@
 'use client'
-import { CldUploadWidget } from 'next-cloudinary';
 import { useEffect, useState } from 'react';
-import WidgetTags from './widgetTags';
 import { GetTagsMB } from '@/lib/actions/db.actions';
 import AddTagsPage from '../popup/addTags';
-import { AddTagsActionVideo } from '@/lib/actions/video.actions';
+import { AddTagsActionVideo, RemoveTagsVideo } from '@/lib/actions/video.actions';
+import { AddTagsAction } from '@/lib/actions/upload.actions';
+import {usePathname } from 'next/navigation';
 
 const SaverTargetPage = ({ pId, saverIsOpen, setsaverIsOpen }) => {
     const [resource, setResource] = useState();
     const [tags, setTags] = useState('');
-    const [tagsArray, setTagsArray] = useState([]);
-    const folderName = 'books'
-    const [activeCdl, setactiveCdl] = useState(false)
-    const [optionsArray, setoptionsArray] = useState(['anime'])
     const [selectedSize, setselectedSize] = useState([]);
     const [ArraySelected, setArraySelected] = useState([])
+    const pathname = usePathname();
 
 
     useEffect(() => {
         console.log(resource);
     }, [resource]);
 
-    const handleTagChange = (event) => {
-        setTags(event.target.value);
-    };
+
 
     const prepareTags = async () => {
-        console.log(selectedSize)
-        const res = await AddTagsActionVideo({ selectedSize, pId })
-        console.log(res)
+        if (pathname.startsWith('/categorie/')) {
+            const res = await AddTagsAction({ selectedSize, pId })
+            if (res.success === true) {
+                setsaverIsOpen(!saverIsOpen)
+            }
+        } else if (pathname.startsWith('/categorieVideo')) {
+            const res = await AddTagsActionVideo({ selectedSize, pId })
+            if (res.success === true) {
+                setsaverIsOpen(!saverIsOpen)
+            }
+        } else {
+            return
+        }
     };
 
     useEffect(() => {
         const prepareTags = async () => {
             const categoriesArray = await GetTagsMB()
             setArraySelected(categoriesArray)
+
+
+
         };
         prepareTags()
     }, [])
 
     const closeWidget = () => {
         setsaverIsOpen(!saverIsOpen);
+    }
+
+    const removeAlltags = async () => {
+
+        if (pathname.startsWith('/categorie/')) {
+
+            if (categoriesArray.success === true) {
+                setsaverIsOpen(!saverIsOpen)
+                console.log('refresjh')
+            }
+            // if (typeof pId === 'string') {
+            //     const categoriesArray = await RemoveTags({ pId })
+            //     console.log(categoriesArray)
+            //     console.log(categoriesArray.success)
+
+            //     // setselectedSize(categoriesArray)
+            // } else if (Array.isArray(pId)) {
+            //     if (pId.length === 1) {
+            //         const categoriesArray = await RemoveTags({ pId })
+            //         console.log(categoriesArray.success)
+            //         if (categoriesArray.success === true) {
+            //             setsaverIsOpen(saverIsOpen)
+            //         }
+            //         console.log(categoriesArray)
+            //         // Add your login logic here
+            //     } else {
+            //         return
+            //     }
+            // } else {
+            //     console.log('Invalid input');
+            // }
+        } else if (pathname.startsWith('/categorieVideo')) {
+            const categoriesArray = await RemoveTagsVideo({ pId })
+            console.log(categoriesArray)
+            console.log(categoriesArray.success)
+            if (categoriesArray.success === true) {
+                setsaverIsOpen(!saverIsOpen)
+                console.log('refresjh')
+            }
+            // if (typeof pId === 'string') {
+            //     console.log('runing video')
+
+            //     // setselectedSize(categoriesArray)
+            // } else if (Array.isArray(pId)) {
+            //     if (pId.length === 1) {
+            //         const categoriesArray = await RemoveTagsVideo({ pId })
+            //         console.log(categoriesArray.success)
+            //         if (categoriesArray.success === true) {
+            //             setsaverIsOpen(saverIsOpen)
+            //         }
+            //         console.log(categoriesArray)
+            //         // Add your login logic here
+            //     } else {
+            //         return
+            //     }
+            // } else {
+            //     console.log('Invalid input');
+            // }
+        } else {
+            return
+        }
+
+
     }
 
     const handleSizeSelection = (clothing) => {
@@ -55,7 +126,7 @@ const SaverTargetPage = ({ pId, saverIsOpen, setsaverIsOpen }) => {
 
 
     return (
-        <main className="text-white centered-div  flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
+        <main className="text-white centered-div z-30  flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
             <label className="text-slate-200 font-medium border-b border-slate-400 p-2 text-center"> Upload New Image </label>
             <button className='fixed top-2 right-2 p-2 ' onClick={closeWidget}>X</button>
 
@@ -87,6 +158,9 @@ const SaverTargetPage = ({ pId, saverIsOpen, setsaverIsOpen }) => {
                         ))}
                     </div>
                 </div>
+                <button onClick={removeAlltags} className="mb-4 border-gray-500 border p-2 w-full">
+                    remove tag
+                </button>
 
                 <div className="mb-4 border-gray-500 border   p-2 w-full">
                     <AddTagsPage />

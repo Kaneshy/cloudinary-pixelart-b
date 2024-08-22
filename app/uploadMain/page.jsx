@@ -1,5 +1,4 @@
 'use client'
-import { uploadImage } from '@/lib/actions/upload.actions';
 import axios from 'axios';
 import { useState } from 'react';
 

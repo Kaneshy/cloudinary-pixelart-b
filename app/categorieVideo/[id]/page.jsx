@@ -1,7 +1,6 @@
 'use client'
 import { FetchVideosbyTags } from '@/lib/actions/video.actions';
-import { CldImage } from 'next-cloudinary';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { IoMdPlay } from "react-icons/io";
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -16,7 +15,6 @@ const CategorieVideoPage = ({ params }) => {
     const [page, setPage] = useState(1);
     const [cursor, setCursor] = useState(null)
     const [totalCountS, settotalCountS] = useState(null)
-    const [pathN, setpathN] = useState('')
     const [selectedSize, setselectedSize] = useState([]);
     const [selecImgs, setselecImgs] = useState(false)
 
@@ -109,9 +107,8 @@ const CategorieVideoPage = ({ params }) => {
                     )}
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
-                            <main className={selectedSize.includes(pId) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl'}>
-
-                                <Link href={`/ByVideo/${pId.public_id}`} key={index} className='relative hover:blur-sm flex items-center justify-center img-content'   >
+                            <main key={index} className={selectedSize.includes(pId.public_id) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl'}>
+                                <Link href={`/ByVideo/${pId.public_id}`}  className='relative hover:blur-sm flex items-center justify-center img-content'   >
                                     <img loading='lazy' src={pId.secure_url} alt={`Imagen ${index}`} />
                                     <div className='absolute rounded-full blur-none p-2'>
                                         <IoMdPlay size={24} />

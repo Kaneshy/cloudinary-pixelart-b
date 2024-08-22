@@ -120,8 +120,8 @@ const CategoriePage = ({ params }) => {
                     )}
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
-                            <main className={selectedSize.includes(pId) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl'}>
-                                <Link href={`/ByImagen/${pId}`}  key={index} className='flex-col img-content'   >
+                            <main key={index}  className={selectedSize.includes(pId) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl'}>
+                                <Link href={`/ByImagen/${pId}`}  className='flex-col img-content'   >
                                     {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
                                     <CldImage
                                         width="250"
