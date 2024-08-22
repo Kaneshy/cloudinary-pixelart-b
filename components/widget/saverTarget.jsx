@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { GetTagsMB } from '@/lib/actions/db.actions';
 import AddTagsPage from '../popup/addTags';
 import { AddTagsActionVideo, RemoveTagsVideo } from '@/lib/actions/video.actions';
-import { AddTagsAction } from '@/lib/actions/upload.actions';
+import { AddTagsAction, RemoveTags } from '@/lib/actions/upload.actions';
 import {usePathname } from 'next/navigation';
 
 const SaverTargetPage = ({ pId, saverIsOpen, setsaverIsOpen }) => {
@@ -54,7 +54,7 @@ const SaverTargetPage = ({ pId, saverIsOpen, setsaverIsOpen }) => {
     const removeAlltags = async () => {
 
         if (pathname.startsWith('/categorie/')) {
-
+            const categoriesArray = await RemoveTags({ pId })
             if (categoriesArray.success === true) {
                 setsaverIsOpen(!saverIsOpen)
                 console.log('refresjh')
