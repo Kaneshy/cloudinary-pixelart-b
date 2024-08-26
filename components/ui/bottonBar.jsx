@@ -1,9 +1,15 @@
 'use client'
 import { bottonBarC } from '@/constants/constatsLinks'
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import PopUpOpenerCdl from '../popup/popupCld'
+import { IoMdCloudUpload } from "react-icons/io";
+import UploadWidgetCdl from '../widget/UploadWidget'
+
 
 const BottonBar = () => {
+  const [isopen, setisopen] = useState(false)
+
 
   return (
     <main className='lg:hidden '>
@@ -16,7 +22,16 @@ const BottonBar = () => {
             </Link>
           )
         })}
+        <button onClick={() => setisopen(!isopen)} className='p-2 justify-center flex items-center gap-2 '>
+          <div><IoMdCloudUpload size={24}/></div>
+          <p className='max-sm:hidden' >Uplaod</p>
+        </button>
       </section>
+      {isopen && (
+        <UploadWidgetCdl isopen={isopen} setisopen={setisopen} />
+      )
+
+      }
     </main>
   )
 }

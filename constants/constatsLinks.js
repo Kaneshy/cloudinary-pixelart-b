@@ -51,18 +51,13 @@ export const videoCategories = [
 export const bottonBarC = [
     {
         name: 'Pictures',
-        route: '/categorie/All', 
+        route: '/categorieVideo/All', 
         logo: <FaVideo size={24}/>
     },
     {
         name: 'Videos',
         route: '/categorie/All', 
         logo: <FaImage size={24}/>
-    },
-    {
-        name: 'Upload',
-        route: '/categorie/All', 
-        logo: <IoMdCloudUpload size={28} />
     }
     
 ]

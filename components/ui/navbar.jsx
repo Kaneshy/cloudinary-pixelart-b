@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import AddTagsPage from '../popup/addTags'
 import Categobar from './categobar'
 import { GetTagsMB } from '@/lib/actions/db.actions'
 import { FaImage } from "react-icons/fa";
-import { RiVideoAddFill } from "react-icons/ri";
+import { FaVideo } from "react-icons/fa";
 
 
 const NavbarPage = () => {
@@ -55,7 +54,7 @@ const NavbarPage = () => {
                         <p>Picutres</p>
                     </Link>
                     <Link href={'/categorieVideo/All'} className='py-2 px-4 font-bold  flex  gap-2 items-center rounded-xl hover:text-purple-700'>
-                        <RiVideoAddFill size={'24'} />
+                        <FaVideo size={'24'} />
                         <p>Videos</p>
                     </Link>
                 </div>

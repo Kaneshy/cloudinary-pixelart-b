@@ -43,7 +43,7 @@ const ImgTarjet = ({ params }) => {
                     {images && (
                         <div className="video-container">
                             <video width="1920" height="1080"
-                                src={images} autoPlay allow="fullscreen" controls allowFullScreen>
+                                src={images} autoPlay allow="fullscreen" loop controls allowFullScreen>
                             </video>
                             {/* <iframe width="1920" height="1080"
                                 //currentVideo.videoUrl
@@ -52,13 +52,11 @@ const ImgTarjet = ({ params }) => {
                         </div>
                     )}
                 </div>
-                <section className='p-4 flex justify-start items-start text-start'>
+                {/* <section className='p-4 flex justify-start items-start text-start'>
                     <div className='w-full rounded-2xl p-4 bg-zinc-900 '>
-                        <button className='p-2 rounded-full bg-zinc-800 hover:bg-red-700' onClick={deleteImage}>
-                            <MdDelete />
-                        </button>
+                        
                     </div>
-                </section>
+                </section> */}
 
             </main>
 

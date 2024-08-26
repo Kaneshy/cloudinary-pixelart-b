@@ -17,16 +17,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="sticky top-0 w-full">
+        <nav className="sticky top-0 w-full  z-20">
           <NavbarPage />
         </nav>
-        <div className="fixed bottom-0 w-full ">
+        <div className="fixed bottom-0 w-full z-50 ">
           <BottonBar />
         </div>
         <main className="flex flex-col ">
 
           {children}
-          <div className="max-lg:hidden">
+          <div className="max-lg:hidden z-20">
             <PopUpOpenerCdl />
             <PopUpOpener />
             <PopUpOpenerVideo />

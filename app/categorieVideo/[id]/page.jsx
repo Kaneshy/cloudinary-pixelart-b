@@ -7,6 +7,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { FaCheck } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
 import SavetoPage from '@/components/popup/saveto';
+import { ImEmbed } from "react-icons/im";
+
 
 
 const CategorieVideoPage = ({ params }) => {
@@ -77,6 +79,20 @@ const CategorieVideoPage = ({ params }) => {
         console.log(selectedSize)
     }
 
+    const handleCopyUrl = (url) => {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    console.log('cliped');
+                })
+                .catch((err) => {
+                    console.error('Failed to copy URL:', err);
+                });
+        } else {
+            alert('Clipboard API not supported');
+        }
+    };
+
 
 
     return (
@@ -91,12 +107,12 @@ const CategorieVideoPage = ({ params }) => {
             }
         >
             <div>
-                <div className='py-2 select-none px-8 w-full bg-zinc-950'>
+                <div className='fixed bottom-[80px] z-20 max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
                     <button
                         onClick={() => setselecImgs(!selecImgs)}
-                        className={` flex gap-2 items-center py-2 px-4 rounded-xl justify-center ${selecImgs ? 'bg-blue-700' : 'bg-zinc-900 '}`}>
+                        className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-zinc-950 max-lg:bg-black '}`}>
                         <CiShoppingTag size={24} />
-                        <p>Select</p>
+                        <p className='lg:hidden'>Select</p>
                     </button>
                 </div>
                 <section className='hp-container p-4 select-none'>
@@ -108,14 +124,14 @@ const CategorieVideoPage = ({ params }) => {
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
                             <main key={index} className={selectedSize.includes(pId.public_id) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl'}>
-                                <Link href={`/ByVideo/${pId.public_id}`}  className='relative hover:blur-sm flex items-center justify-center img-content'   >
+                                <Link href={`/ByVideo/${pId.public_id}`} className='relative hover:blur-sm flex items-center justify-center img-content'   >
                                     <img loading='lazy' src={pId.secure_url} alt={`Imagen ${index}`} />
                                     <div className='absolute rounded-full blur-none p-2'>
                                         <IoMdPlay size={24} />
                                     </div>
                                 </Link>
                                 {selecImgs && (
-                                    <div className='flex items-center bg-zinc-900 rounded-b-xl px-2 gap-2'>
+                                    <div className='flex items-center  bg-zinc-900 rounded-b-xl px-2 gap-2'>
                                         <button
                                             onClick={() => handleselected(pId.public_id)}
                                             className={'text-blue-700 w-6 h-6 flex items-center justify-center  border border-zinc-700'}
@@ -123,9 +139,14 @@ const CategorieVideoPage = ({ params }) => {
 
                                             {selectedSize.includes(pId.public_id) ? <FaCheck size={14} /> : <p></p>}
                                         </button>
-                                        <div className=''>
+                                        <div className='hover:text-blue-700'>
                                             <SavetoPage pId={pId.public_id} />
                                         </div>
+                                        <button
+                                            onClick={() => handleCopyUrl(pId.secure_b)}
+                                            className={'text-white p-1 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 border border-transparent transition-all duration-300 ease-in-out transform hover:scale-110 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:border-purple-500'}>
+                                            <ImEmbed size={16} />
+                                        </button>
 
                                     </div>
                                 )}
@@ -134,8 +155,8 @@ const CategorieVideoPage = ({ params }) => {
                     </div>
                 </section>
 
-            </div>
-        </InfiniteScroll>
+            </div >
+        </InfiniteScroll >
     );
 };
 

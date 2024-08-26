@@ -8,6 +8,7 @@ import SavetoPage from '@/components/popup/saveto';
 import AddTagsPage from '@/components/popup/addTags';
 import { FaCheck } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
+import { ImEmbed } from 'react-icons/im';
 
 
 const CategoriePage = ({ params }) => {
@@ -23,8 +24,7 @@ const CategoriePage = ({ params }) => {
         console.log('selectedSize', selectedSize)
         async function FetchImages() {
             const result = await FetchImagesbyTags({ tag: params.id, nCursor: null, maxResults: 20, });
-            setImages(result.props.publicId); // Store the result in the component state
-            console.log('tcound', result.props.totalCount)
+            setImages(result.props.publicIdAndUrls); // Store the result in the component state
             settotalCountS(result.props.totalCount)
             if (result.props.nextCursor) {
                 setCursor(result.props.nextCursor)
@@ -49,7 +49,7 @@ const CategoriePage = ({ params }) => {
             console.log('if')
             try {
                 const result = await FetchImagesbyTags({ tag: params.id, nCursor: cursor, maxResults: 20 });
-                setImages((prevPosts) => [...prevPosts, ...result.props.publicId]);
+                setImages((prevPosts) => [...prevPosts, ...result.props.publicIdAndUrls]);
                 if (result.props.nextCursor) {
                     setCursor(result.props.nextCursor)
                 }
@@ -63,7 +63,7 @@ const CategoriePage = ({ params }) => {
             console.log('else if')
             const result = await FetchImagesbyTags({ tag: params.id, nCursor: cursor, maxResults: 20 + remainder });
             // const processedImages = result.props.publicId.slice(20);
-            setImages((prevPosts) => [...prevPosts, ...result.props.publicId]);
+            setImages((prevPosts) => [...prevPosts, ...result.props.publicIdAndUrls]);
             setPage((prevPage) => prevPage + 1);
         } else {
             console.log('else')
@@ -81,13 +81,27 @@ const CategoriePage = ({ params }) => {
             // Si la prenda no está seleccionada, la añadimos a la selección
             setselectedSize([...selectedSize, clothing]);
         }
-        console.log(selectedSize)
     }
 
     const handleSeveralTags = async () => {
         console.log(selectedSize)
         const res = await AddTagsAction({ selectedSize, pId })
         console.log(res)
+    };
+
+    
+    const handleCopyUrl = (url) => {
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url)
+                .then(() => {
+                    console.log('cliped');
+                })
+                .catch((err) => {
+                    console.error('Failed to copy URL:', err);
+                });
+        } else {
+            alert('Clipboard API not supported');
+        }
     };
 
 
@@ -104,15 +118,15 @@ const CategoriePage = ({ params }) => {
             }
         >
             <div>
-                <div className='py-2 select-none px-8 w-full bg-zinc-950'>
+                <div className='fixed z-50 bottom-[80px] max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
                     <button
                         onClick={() => setselecImgs(!selecImgs)}
-                        className={` flex gap-2 items-center py-2 px-4 rounded-xl justify-center ${selecImgs ? 'bg-blue-700' : 'bg-zinc-900 '}`}>
+                        className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-zinc-950 max-lg:bg-black '}`}>
                         <CiShoppingTag size={24} />
-                        <p>Select</p>
+                        <p className='lg:hidden'>Select</p>
                     </button>
                 </div>
-                <section className='hp-container p-4'>
+                <section className='hp-container p-4 max-sm:p-0'>
                     {selectedSize && selectedSize.length > 0 && (
                         <div className='fixed bottom-4 left-8 bg-blue-700 rounded-xl font-bold text-white'>
                             <SavetoPage pId={selectedSize} />
@@ -120,14 +134,15 @@ const CategoriePage = ({ params }) => {
                     )}
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
-                            <main key={index}  className={selectedSize.includes(pId) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl'}>
-                                <Link href={`/ByImagen/${pId}`}  className='flex-col img-content'   >
+                            <main key={index}  className={selectedSize.includes(pId.public_id) ? 'border-blue-700 border bg-zinc-950 rounded-xl max-sm:bg-zinc-800' : 'bg-zinc-950 rounded-xl max-sm:bg-zinc-800'}>
+                                <Link href={`/ByImagen/${pId.public_id}`}  className='flex-col img-content'   >
                                     {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
                                     <CldImage
+                                        className='max-sm:w-full'
                                         width="250"
                                         height="300"
                                         sizes="100vw"
-                                        src={pId}
+                                        src={pId.public_id}
                                         alt="Description of my image"
                                         priority={false}
                                     />
@@ -135,15 +150,20 @@ const CategoriePage = ({ params }) => {
                                 {selecImgs && (
                                     <div className='flex items-center bg-zinc-900 rounded-b-xl px-2 gap-2'>
                                         <button
-                                            onClick={() => handleselected(pId)}
+                                            onClick={() => handleselected(pId.public_id)}
                                             className={'text-blue-700 w-6 h-6 flex items-center justify-center  border border-zinc-700'}
                                         >
 
-                                            {selectedSize.includes(pId) ? <FaCheck size={14} /> : <p></p>}
+                                            {selectedSize.includes(pId.public_id) ? <FaCheck size={14} /> : <p></p>}
                                         </button>
                                         <div className=''>
                                             <SavetoPage pId={pId} />
                                         </div>
+                                        <button
+                                            onClick={() => handleCopyUrl(pId.secure_url)}
+                                            className={'text-white p-1 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 border border-transparent transition-all duration-300 ease-in-out transform hover:scale-110 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:border-purple-500'}>
+                                            <ImEmbed size={16} />
+                                        </button>
 
                                     </div>
                                 )}
