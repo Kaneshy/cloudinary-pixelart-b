@@ -4,6 +4,7 @@ import NavbarPage from "@/components/ui/navbar";
 import PopUpOpener from "@/components/popup/popup";
 import PopUpOpenerVideo from "@/components/popup/popupVideo";
 import PopUpOpenerCdl from "@/components/popup/popupCld";
+import BottonBar from "@/components/ui/bottonBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,15 +17,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <nav className="sticky top-0 w-full">
+          <NavbarPage />
+        </nav>
+        <div className="fixed bottom-0 w-full ">
+          <BottonBar />
+        </div>
         <main className="flex flex-col ">
-          <nav>
-            <NavbarPage />
-          </nav>
+
           {children}
-          <PopUpOpenerCdl/>
-          <PopUpOpener />
-          <PopUpOpenerVideo />
+          <div className="max-lg:hidden">
+            <PopUpOpenerCdl />
+            <PopUpOpener />
+            <PopUpOpenerVideo />
+          </div>
+
         </main>
+        
 
       </body>
     </html>

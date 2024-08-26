@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,7 +32,12 @@ body {
     text-wrap: balance;
   }
 }
-
+.pixelify-sans {
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700px;
+  font-style: normal;
+}
 
 
 .centered-div {
@@ -166,10 +172,15 @@ body {
 
 
 
-
+.video-x {
+  top: 250px;
+  left: 310px;
+  width: 14rem;
+  height: 14rem;
+}
 
 .tv-background {
-  background-image: url('https://res.cloudinary.com/dh01ngdjo/image/upload/v1723992504/test1/pfujybzghp8qx55ucnye.jpg'); /* Replace with your image URL */
+  background-image: url('https://res.cloudinary.com/dztz492su/image/upload/v1724429665/image-ai-brush-removebg-5jlx076d_nfgrn9.png'); /* Replace with your image URL */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -187,8 +198,8 @@ body {
 
 
 .tv-container {
-  width: 300px; /* Adjust the size of the TV container */
-  height: 250px; /* Adjust the height of the TV container */
+  width: 800px; /* Adjust the size of the TV container */
+  height: 500px; /* Adjust the height of the TV container */
   background: #333; /* Dark background to mimic an old TV case */
   border-radius: 15px; /* Rounded corners for a retro look */
   box-shadow: inset 0 0 10px #000, 0 10px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
@@ -283,4 +294,26 @@ body {
 .header-max-h {
   max-height: 780px;
   overflow: hidden;
+}
+
+
+.pixel-button {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  color: #fff;
+  background-color: #f00;
+  padding: 16px;
+  text-align: center;
+  border: 8px solid #000;
+  box-shadow: 4px 4px 0px #000;
+  cursor: pointer;
+  text-transform: uppercase;
+  display: inline-block;
+  user-select: none;
+  transition: all 0.1s;
+}
+
+.pixel-button:active {
+  box-shadow: 0 0 0 #000;
+  transform: translate(4px, 4px);
 }

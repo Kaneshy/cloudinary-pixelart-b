@@ -1,3 +1,13 @@
+import { GrMultiple } from "react-icons/gr";
+import { FaImage } from "react-icons/fa";
+import { RiVideoAddFill } from "react-icons/ri";
+import { MdOutlineFileUpload } from "react-icons/md";
+import { FaVideo } from "react-icons/fa";
+import { IoMdCloudUpload } from "react-icons/io";
+
+
+
+
 export const constatsLinks = [
     {
         title:'Images',
@@ -37,3 +47,22 @@ export const videoCategories = [
     "Art",
     "History"
 ];
+
+export const bottonBarC = [
+    {
+        name: 'Pictures',
+        route: '/categorie/All', 
+        logo: <FaVideo size={24}/>
+    },
+    {
+        name: 'Videos',
+        route: '/categorie/All', 
+        logo: <FaImage size={24}/>
+    },
+    {
+        name: 'Upload',
+        route: '/categorie/All', 
+        logo: <IoMdCloudUpload size={28} />
+    }
+    
+]
