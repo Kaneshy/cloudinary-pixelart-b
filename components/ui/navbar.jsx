@@ -59,19 +59,16 @@ const NavbarPage = () => {
                     </Link>
                 </div>
             </nav>
-            <div className='flex p-2 overflow-x-auto centered-bar  select-none flex-row gap-4 items-center justify-center'>
-                <Link href={`/categorie${pathN}All`} className='transition text-zinc-400 duration-300 ease-in-out transform hover:text-purple-700  hover:scale-105  bg-black rounded-xl'>
-                    <div className=' px-4 py-1 rounded-lg '>
-                        All
-                    </div>
+            <div className="flex p-2 overflow-x-auto select-none gap-4 items-center scrollbar-hide">
+                <Link href={`/categorie${pathN}All`} className="transition text-zinc-400 duration-300 ease-in-out transform hover:text-purple-700 hover:scale-105 bg-black rounded-xl whitespace-nowrap">
+                    <div className="px-4 py-1 rounded-lg">All</div>
                 </Link>
                 {ArraySelected.map((x, index) => (
-                    <Link href={`/categorie${pathN + x}`} className='transition text-zinc-400 duration-300 ease-in-out transform hover:text-purple-700  hover:scale-105  bg-black rounded-xl' key={index}>
-                        <div className=' px-4 py-1 rounded-lg '>
+                    <Link href={`/categorie${pathN + x}`} className="transition text-zinc-400 duration-300 ease-in-out transform hover:text-purple-700 hover:scale-105 bg-black rounded-xl whitespace-nowrap" key={index}>
+                        <div className="px-4 py-1 rounded-lg">
                             {x}
                         </div>
                     </Link>
-
                 ))}
             </div>
         </main>

@@ -134,7 +134,7 @@ const CategoriePage = ({ params }) => {
                     )}
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
-                            <main key={index}  className={selectedSize.includes(pId.public_id) ? 'border-blue-700 border bg-zinc-950 rounded-xl max-sm:bg-zinc-800' : 'bg-zinc-950 rounded-xl max-sm:bg-zinc-800'}>
+                            <main key={index}  className={selectedSize.includes(pId.public_id) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl '}>
                                 <Link href={`/ByImagen/${pId.public_id}`}  className='flex-col img-content'   >
                                     {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
                                     <CldImage
