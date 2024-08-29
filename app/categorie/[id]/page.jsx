@@ -1,7 +1,7 @@
 'use client'
-import { AddTagsAction, FetchImagesbyTags } from '@/lib/actions/upload.actions';
+import { AddTagsAction, DeleteImagebyPublicId, FetchImagesbyTags } from '@/lib/actions/upload.actions';
 import { CldImage } from 'next-cloudinary';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import SavetoPage from '@/components/popup/saveto';
@@ -9,6 +9,10 @@ import AddTagsPage from '@/components/popup/addTags';
 import { FaCheck } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
 import { ImEmbed } from 'react-icons/im';
+import { IoMdClose } from "react-icons/io";
+import { MdDelete } from 'react-icons/md';
+import { useRouter } from 'next/navigation';
+
 
 
 const CategoriePage = ({ params }) => {
@@ -19,6 +23,10 @@ const CategoriePage = ({ params }) => {
     const [totalCountS, settotalCountS] = useState(null)
     const [selectedSize, setselectedSize] = useState([]);
     const [selecImgs, setselecImgs] = useState(false)
+    const [popupImg, setpopupImg] = useState(false)
+    const [imgPopUp, setimgPopUp] = useState('')
+
+    const popupRef = useRef();
 
     useEffect(() => {
         console.log('selectedSize', selectedSize)
@@ -89,7 +97,7 @@ const CategoriePage = ({ params }) => {
         console.log(res)
     };
 
-    
+
     const handleCopyUrl = (url) => {
         if (navigator.clipboard) {
             navigator.clipboard.writeText(url)
@@ -104,6 +112,33 @@ const CategoriePage = ({ params }) => {
         }
     };
 
+    const handlePopUpImg = (url) => {
+        setimgPopUp(url)
+        setpopupImg(!popupImg)
+    }
+
+    const handleOverlayClick = (e) => {
+        // Close the popup if the click is outside the image
+        if (popupRef.current && !popupRef.current.contains(e.target)) {
+            setpopupImg(!popupImg)
+        }
+    };
+
+    const deleteImage = async (url) => {
+        const res = await DeleteImagebyPublicId({ publicIdA: url })
+        if (res.result == 'ok') {
+            console.log('imagen deleted')
+        } else {
+            console.log('Error at deleting request')
+        }
+        console.log(res.result)
+    }
+
+    const handleSelectedImages = () => {
+        setselecImgs(!selecImgs)
+        setselectedSize([])
+    }
+
 
 
     return (
@@ -113,29 +148,55 @@ const CategoriePage = ({ params }) => {
             hasMore={hasMore}
             loader={
                 <div className='w-full flex justify-center items-center text-center p-8'>
-                    <div className='bg-zinc-700 px-8 py-4 rounded-xl font-bold text-sm'>Loading...</div>
+                    <div className='bg-zinc-900 px-8 py-4 rounded-xl font-bold pixelify-sans text-sm'> LOADING... </div>
                 </div>
             }
         >
             <div>
-                <div className='fixed z-50 bottom-[80px] max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
+                <div className='fixed z-20 bottom-[80px] max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
                     <button
-                        onClick={() => setselecImgs(!selecImgs)}
+                         onClick={handleSelectedImages}
                         className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-zinc-950 max-lg:bg-black '}`}>
                         <CiShoppingTag size={24} />
-                        <p className='lg:hidden'>Select</p>
                     </button>
                 </div>
+                {popupImg && (
+                    <div onClick={handleOverlayClick} className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-75">
+                        <button
+                            onClick={() => setpopupImg(!popupImg)}
+                            className="absolute  z-50 top-2 right-2 text-white bg-white bg-opacity-60 p-2 rounded-full"
+                        >
+                            <IoMdClose />
+                        </button>
+                        <div ref={popupRef} className="relative">
+                            <img src={imgPopUp} alt="Popup" className="max-w-full p-2 h-screen object-contain" />
+
+                        </div>
+                    </div>
+                )}
                 <section className='hp-container p-4 max-sm:p-0'>
                     {selectedSize && selectedSize.length > 0 && (
-                        <div className='fixed bottom-4 left-8 bg-blue-700 rounded-xl font-bold text-white'>
+                        <div className='fixed top-38 z-20 py-2 px-4 flex gap-2 rounded-lg items-center justify-evenly left-8 bg-blue-700 font-bold text-white'>
                             <SavetoPage pId={selectedSize} />
+                            <p>{selectedSize.length}</p>
                         </div>
                     )}
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
-                            <main key={index}  className={selectedSize.includes(pId.public_id) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl '}>
-                                <Link href={`/ByImagen/${pId.public_id}`}  className='flex-col img-content'   >
+                            <main key={index} className={selectedSize.includes(pId.public_id) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl '}>
+                                {/* <Link href={`/ByImagen/${pId.public_id}`} target='_blank' className='flex-col img-content'   > */}
+                                {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
+                                {/* <CldImage
+                                        className='max-sm:w-full'
+                                        width="250"
+                                        height="300"
+                                        sizes="100vw"
+                                        src={pId.public_id}
+                                        alt="Description of my image"
+                                        priority={false}
+                                    />
+                                </Link> */}
+                                <div onClick={() => handlePopUpImg(pId.secure_url)} className='flex-col img-content'   >
                                     {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
                                     <CldImage
                                         className='max-sm:w-full'
@@ -146,15 +207,16 @@ const CategoriePage = ({ params }) => {
                                         alt="Description of my image"
                                         priority={false}
                                     />
-                                </Link>
+                                </div>
+
                                 {selecImgs && (
-                                    <div className='flex items-center bg-zinc-900 rounded-b-xl px-2 gap-2'>
+                                    <div className='flex items-center p-2 bg-zinc-900 rounded-b-xl px-2 gap-2'>
                                         <button
                                             onClick={() => handleselected(pId.public_id)}
                                             className={'text-blue-700 w-6 h-6 flex items-center justify-center  border border-zinc-700'}
                                         >
 
-                                            {selectedSize.includes(pId.public_id) ? <FaCheck size={14} /> : <p></p>}
+                                            {selectedSize.includes(pId.public_id) ? <FaCheck size={20} /> : <p></p>}
                                         </button>
                                         <div className=''>
                                             <SavetoPage pId={pId} />
@@ -163,6 +225,9 @@ const CategoriePage = ({ params }) => {
                                             onClick={() => handleCopyUrl(pId.secure_url)}
                                             className={'text-white p-1 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 border border-transparent transition-all duration-300 ease-in-out transform hover:scale-110 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:border-purple-500'}>
                                             <ImEmbed size={16} />
+                                        </button>
+                                        <button className='p-2 rounded-full bg-zinc-800 hover:bg-red-700' onClick={() => deleteImage(pId.public_id)}>
+                                            <MdDelete />
                                         </button>
 
                                     </div>

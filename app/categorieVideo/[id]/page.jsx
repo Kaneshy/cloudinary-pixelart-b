@@ -1,8 +1,8 @@
 'use client'
 import { FetchVideosbyTags } from '@/lib/actions/video.actions';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { IoMdPlay } from "react-icons/io";
+import { IoMdClose, IoMdPlay } from "react-icons/io";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { FaCheck } from "react-icons/fa";
 import { CiShoppingTag } from "react-icons/ci";
@@ -19,6 +19,11 @@ const CategorieVideoPage = ({ params }) => {
     const [totalCountS, settotalCountS] = useState(null)
     const [selectedSize, setselectedSize] = useState([]);
     const [selecImgs, setselecImgs] = useState(false)
+
+    const [popupImg, setpopupImg] = useState(false)
+    const [imgPopUp, setimgPopUp] = useState('')
+
+    const popupRef = useRef();
 
     useEffect(() => {
 
@@ -93,6 +98,22 @@ const CategorieVideoPage = ({ params }) => {
         }
     };
 
+    const handlePopUpImg = (url) => {
+        setimgPopUp(url)
+        setpopupImg(!popupImg)
+    }
+
+    const handleOverlayClick = (e) => {
+        // Close the popup if the click is outside the image
+        if (popupRef.current && !popupRef.current.contains(e.target)) {
+            setpopupImg(!popupImg)
+        }
+    };
+
+    const handleSelectedImages = () => {
+        setselecImgs(!selecImgs)
+        setselectedSize([])
+    }
 
 
     return (
@@ -102,36 +123,66 @@ const CategorieVideoPage = ({ params }) => {
             hasMore={hasMore}
             loader={
                 <div className='w-full flex justify-center items-center text-center p-8'>
-                    <div className='bg-zinc-700 px-8 py-4 rounded-xl font-bold text-sm'>Loading...</div>
+                    <div className='bg-zinc-900 px-8 py-4 rounded-xl font-bold pixelify-sans text-sm'> LOADING... </div>
                 </div>
             }
         >
             <div>
                 <div className='fixed bottom-[80px] z-20 max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
                     <button
-                        onClick={() => setselecImgs(!selecImgs)}
+                        onClick={handleSelectedImages}
                         className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-zinc-950 max-lg:bg-black '}`}>
                         <CiShoppingTag size={24} />
-                        <p className='lg:hidden'>Select</p>
                     </button>
                 </div>
+
+                {popupImg && (
+                    <div onClick={handleOverlayClick} className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-75">
+                        <button
+                            onClick={() => setpopupImg(!popupImg)}
+                            className="absolute  z-50 top-2 right-2 text-white bg-white bg-opacity-60 p-2 rounded-full"
+                        >
+                            <IoMdClose />
+                        </button>
+                        {/* <div ref={popupRef} className="relative">
+                            <img src={imgPopUp} alt="Popup" className="max-w-full p-2 h-screen object-contain" />
+                        </div> */}
+                        <div ref={popupRef} className="video-container bg-black relative">
+                            <video width="1920" height="1080"
+                                src={imgPopUp} autoPlay allow="fullscreen" loop controls allowFullScreen>
+                            </video>
+                        </div>
+                    </div>
+
+
+                )}
+
+
                 <section className='hp-container p-4 select-none'>
                     {selectedSize && selectedSize.length > 0 && (
-                        <div className='fixed z-50 bottom-4 left-8 bg-blue-700 rounded-xl font-bold text-white'>
+                        <div className='fixed top-38 z-20 py-2 px-4 flex gap-2 rounded-lg items-center justify-evenly left-8 bg-blue-700 font-bold text-white'>
                             <SavetoPage pId={selectedSize} />
+                            <p>{selectedSize.length}</p>
                         </div>
                     )}
                     <div className='pm-grid-container' >
                         {images && images.map((pId, index) => (
                             <main key={index} className={selectedSize.includes(pId.public_id) ? 'border-blue-700 border bg-zinc-950 rounded-xl' : 'bg-zinc-950 rounded-xl'}>
-                                <Link href={`/ByVideo/${pId.public_id}`} className='relative hover:blur-sm flex items-center justify-center img-content'   >
+                                {/* <Link href={`/ByVideo/${pId.public_id}`} className='relative hover:blur-sm flex items-center justify-center img-content'   >
                                     <img loading='lazy' src={pId.secure_url} alt={`Imagen ${index}`} />
                                     <div className='absolute rounded-full blur-none p-2'>
                                         <IoMdPlay size={24} />
                                     </div>
-                                </Link>
+                                </Link> */}
+                                <div onClick={() => handlePopUpImg(pId.secure_b)} className='relative hover:blur-sm flex items-center justify-center img-content'   >
+                                    <img loading='lazy' src={pId.secure_url} alt={`Imagen ${index}`} />
+                                    <div className='absolute rounded-full blur-none p-2'>
+                                        <IoMdPlay size={24} />
+                                    </div>
+                                </div>
+
                                 {selecImgs && (
-                                    <div className='flex items-center  bg-zinc-900 rounded-b-xl px-2 gap-2'>
+                                    <div className='flex items-center p-2  bg-zinc-900 rounded-b-xl px-2 gap-2'>
                                         <button
                                             onClick={() => handleselected(pId.public_id)}
                                             className={'text-blue-700 w-6 h-6 flex items-center justify-center  border border-zinc-700'}

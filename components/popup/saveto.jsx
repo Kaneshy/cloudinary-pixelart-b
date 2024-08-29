@@ -10,7 +10,7 @@ const SavetoPage = ({ pId }) => {
 
   return (
     <main className=''>
-      <button onClick={() => setsaverIsOpen(!saverIsOpen)} className='p-2 '>
+      <button onClick={() => setsaverIsOpen(!saverIsOpen)} className='flex hover:scale-105 items-center '>
         <CiShoppingTag size={24} />
       </button>
       {saverIsOpen && (

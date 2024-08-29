@@ -127,12 +127,12 @@ const SaverTargetPage = ({ pId, saverIsOpen, setsaverIsOpen }) => {
 
     return (
         <main className="text-white centered-div z-30  flex flex-col gap-y-4 p-6 bg-slate-100 rounded-md shadow-lg">
-            <label className="text-slate-200 font-medium border-b border-slate-400 p-2 text-center"> Upload New Image </label>
+            <label className="text-slate-200 font-medium border-b border-slate-400 p-2 text-center"> Manage tags and categories </label>
             <button className='fixed top-2 right-2 p-2 ' onClick={closeWidget}>X</button>
 
             <section className="mb-4 border-gray-500 border p-2 w-full">
                 <div className="mb-4 border-gray-500 border p-2 w-full">
-                    <h3>Prendas seleccionadas:</h3>
+                    <h3>Select Categorie or Add a New One:</h3>
                 </div>
                 <div className="mb-4  border-gray-500 border  p-2 w-full">
                     <div className="gap-2 p-2">
@@ -159,7 +159,7 @@ const SaverTargetPage = ({ pId, saverIsOpen, setsaverIsOpen }) => {
                     </div>
                 </div>
                 <button onClick={removeAlltags} className="mb-4 border-gray-500 border p-2 w-full">
-                    remove tag
+                    remove all tags
                 </button>
 
                 <div className="mb-4 border-gray-500 border   p-2 w-full">
