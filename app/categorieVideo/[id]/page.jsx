@@ -131,7 +131,7 @@ const CategorieVideoPage = ({ params }) => {
                 <div className='fixed bottom-[90px] z-20 max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
                     <button
                         onClick={handleSelectedImages}
-                        className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-zinc-950 max-lg:bg-black '}`}>
+                        className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-[#070707]  '}`}>
                         <CiShoppingTag size={24} />
                     </button>
                 </div>
@@ -140,7 +140,7 @@ const CategorieVideoPage = ({ params }) => {
                     <div onClick={handleOverlayClick} className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-75">
                         <button
                             onClick={() => setpopupImg(!popupImg)}
-                            className="absolute  z-50 top-2 right-2 text-white bg-white bg-opacity-60 p-2 rounded-full"
+                            className="absolute max-sm:right-1/2 max-sm:bottom-6 bg-opacity-30  z-50 sm:top-2 right-2 text-white bg-white  p-2 rounded-full"
                         >
                             <IoMdClose />
                         </button>

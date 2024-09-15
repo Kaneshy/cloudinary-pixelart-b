@@ -1,7 +1,7 @@
 'use client'
 import { bottonBarC } from '@/constants/constatsLinks'
 import Link from 'next/link'
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import UploadWidgetCdl from '../widget/UploadWidget'
 import { BsUpload } from "react-icons/bs";
 
@@ -14,7 +14,7 @@ const BottonBar = () => {
 
   return (
     <>
-      <main className='lg:hidden text-sm z-40 bg-black backdrop-blur-md bg-opacity-90'>
+      <main className='lg:hidden text-sm z-40 bg-[#070707] backdrop-blur-md bg-opacity-90'>
         <section className='flex p-2 justify-evenly  gap-2 w-full '>
           {bottonBarC.map((x, index) => {
             return (
@@ -29,14 +29,11 @@ const BottonBar = () => {
             <p className='max-sm:hidden' >Uplaod</p>
           </button>
         </section>
-        
-      </main>
-      {}
-      {isopen && (
-          <UploadWidgetCdl isopen={isopen} setisopen={setisopen} />
-        )
 
-        }
+      </main>
+      {isopen && (
+        <UploadWidgetCdl isopen={isopen} setisopen={setisopen} />
+      )}
     </>
   )
 

@@ -6,10 +6,6 @@ import UploadWidgetCdl from './UploadWidget';
 const WidgetTags = ({tagsArray, folderName}) => {
     const [resource, setResource] = useState();
 
-    useEffect(() => {
-        console.log('wT', tagsArray, folderName);
-    }, []);
-
 
     return (
         <div className='flex items-center justify-center'> 

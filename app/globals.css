@@ -136,6 +136,14 @@ body {
   gap: 20px;
 }
 
+.grid-d {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin: 0 auto;
+  gap: 20px;
+}
+
 .max-w-a {
   max-width: 1200px;
   margin: 0 auto;

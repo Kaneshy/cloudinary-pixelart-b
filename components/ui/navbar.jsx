@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Categobar from './categobar'
@@ -7,6 +7,9 @@ import { GetTagsMB } from '@/lib/actions/db.actions'
 import { CiFolderOn } from "react-icons/ci";
 import { CiImageOn } from "react-icons/ci";
 import { CiVideoOn } from "react-icons/ci";
+import { FiChevronsDown } from "react-icons/fi";
+
+
 
 
 
@@ -15,10 +18,10 @@ import { CiVideoOn } from "react-icons/ci";
 const NavbarPage = () => {
     const pathname = usePathname()
 
-    const array1 = ['All', 'anime', 'books', 'drawing', 'art', 'Art']
-    const VideosArray = ['All', 'music', 'nature', 'IRL', 'comedy', 'learning', 'film', 'animation', 'retro']
     const [pathN, setpathN] = useState('')
     const [ArraySelected, setArraySelected] = useState([])
+    const [popupcatego, setpopupcatego] = useState(false)
+    const formRef = useRef(null)
 
     useEffect(() => {
         if (pathname.startsWith('/categorie/')) {
@@ -45,6 +48,29 @@ const NavbarPage = () => {
         }
     }, [pathname])
 
+    useEffect(() => {
+        setpopupcatego(false)
+    }, [pathname])
+    
+
+    useEffect(() => {
+
+        const handleClickOutside = (event) => {
+            if (formRef.current && !formRef.current.contains(event.target)) {
+                setpopupcatego(false); // Close the form
+            }
+        };
+
+        // Add event listener to detect clicks outside the form
+        document.addEventListener('mousedown', handleClickOutside);
+
+        // Clean up event listener on unmount
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [setpopupcatego]);
+
+
     return (
         <main className='select-none bg-black '>
             <Categobar />
@@ -65,26 +91,43 @@ const NavbarPage = () => {
                     
                 </div> */}
             </nav>
-            <div className="flex p-2 overflow-x-auto select-none gap-4 items-center scrollbar-hide">
-                <Link href={`/categorie${pathN}All`} className=" border  text-sm border-zinc-500  text-zinc-400   hover:bg-zinc-900 bg-black rounded-xl whitespace-nowrap">
-                    <div className="px-4 py-1 flex items-center gap-2 rounded-lg text-sm">
-                        <CiFolderOn />
-                        <p>
-                            All
-                        </p>
-                    </div>
-                </Link>
-                {ArraySelected.map((x, index) => (
-                    <Link href={`/categorie${pathN + x}`} className=" border border-zinc-500  text-zinc-400   hover:bg-zinc-900 bg-black rounded-xl whitespace-nowrap" key={index}>
-                        <div className="px-4 py-1 flex items-center gap-2 rounded-lg text-sm">
-                            <CiFolderOn />
-                            <p>
-                                {x}
-                            </p>
-                        </div>
-                    </Link>
-                ))}
+            <div className='flex items-center p-1'>
+                <div className="flex p-2 overflow-x-auto select-none gap-4 items-center scrollbar-hide">
+                    {ArraySelected.map((x, index) => (
+                        <Link href={`/categorie${pathN + x}`} className=" border border-zinc-500  text-zinc-400   hover:bg-zinc-900 bg-black rounded-xl whitespace-nowrap" key={index}>
+                            <div className="px-4 py-1 flex items-center gap-2 rounded-lg text-sm">
+                                <CiFolderOn />
+                                <p>
+                                    {x}
+                                </p>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+                <div
+                    onClick={() => setpopupcatego(!popupcatego)}
+                    className='bg-zinc-900 hover:bg-zinc-800 rounded-full py-2 flex h-full px-4'>
+                    <FiChevronsDown />
+                </div>
             </div>
+            {popupcatego && (
+                <div className="fixed inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center z-50 overflow-auto">
+                    <div
+                        ref={formRef}
+                        className=' p-14 bg-[#000000] rounded-xl grid-d max-w-[1200px] '
+                    >
+                        {ArraySelected.map((x, index) => (
+                            <Link href={`/categorie${pathN + x}`} className="  text-zinc-400   hover:bg-zinc-800 bg-[#070707] rounded-xl whitespace-nowrap" key={index}>
+                                <div className="px-4 justify-center py-2 flex items-center gap-2 rounded-lg text-sm">
+                                    {x}
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+
+                </div>
+            )}
+
         </main>
     )
 }
