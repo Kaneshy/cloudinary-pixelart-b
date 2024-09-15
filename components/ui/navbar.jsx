@@ -8,6 +8,7 @@ import { CiFolderOn } from "react-icons/ci";
 import { CiImageOn } from "react-icons/ci";
 import { CiVideoOn } from "react-icons/ci";
 import { FiChevronsDown } from "react-icons/fi";
+import { IoMdClose } from 'react-icons/io'
 
 
 
@@ -51,7 +52,7 @@ const NavbarPage = () => {
     useEffect(() => {
         setpopupcatego(false)
     }, [pathname])
-    
+
 
     useEffect(() => {
 
@@ -111,13 +112,22 @@ const NavbarPage = () => {
                 </div>
             </div>
             {popupcatego && (
-                <div className="fixed inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center z-50 overflow-auto">
+                <div className="fixed inset-0 bg-black bg-opacity-80 flex flex-col justify-center  z-50 overflow-auto">
+                    <button
+                            onClick={() => setpopupcatego(!popupcatego)}
+                            className="absolute max-sm:right-1/2 max-sm:bottom-6 bg-opacity-30  z-50 sm:top-2 right-2 text-white bg-white  p-2 rounded-full"
+                        >
+                            <IoMdClose />
+                        </button>
                     <div
                         ref={formRef}
-                        className=' p-14 bg-[#000000] rounded-xl grid-d max-w-[1200px] '
+                        className=' p-14 bg-neutral-950 rounded-xl grid-d max-w-[1000px] '
                     >
                         {ArraySelected.map((x, index) => (
-                            <Link href={`/categorie${pathN + x}`} className="  text-zinc-400   hover:bg-zinc-800 bg-[#070707] rounded-xl whitespace-nowrap" key={index}>
+                            <Link href={`/categorie${pathN + x}`} className="  text-zinc-400 flex items-center    hover:bg-zinc-800 bg-[#070707] rounded-xl whitespace-nowrap" key={index}>
+                                <div className='px-2'>
+                                    <CiFolderOn size={24} />
+                                </div>
                                 <div className="px-4 justify-center py-2 flex items-center gap-2 rounded-lg text-sm">
                                     {x}
                                 </div>
