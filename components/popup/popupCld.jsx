@@ -16,7 +16,7 @@ const PopUpOpenerCdl = () => {
         <main>
             <div className='fixed bottom-2 right-36 '>
                 <div>
-                    <button className=' p-4 bg-zinc-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
+                    <button className=' p-4 hover:bg-zinc-900 bg-zinc-950 rounded-2xl' onClick={() => setisopen(!isopen)}>
                         <GrMultiple   size={'24'} />
                     </button>
 

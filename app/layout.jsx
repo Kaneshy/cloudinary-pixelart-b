@@ -17,10 +17,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav className="sticky top-0 w-full  z-20">
+        <nav className="sticky top-0 w-full z-10">
           <NavbarPage />
         </nav>
-        <div className="fixed bottom-0 w-full z-50 ">
+        <div className="fixed bottom-0 w-full z-20 ">
           <BottonBar />
         </div>
         <main className="flex flex-col ">

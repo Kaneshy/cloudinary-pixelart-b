@@ -4,8 +4,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Categobar from './categobar'
 import { GetTagsMB } from '@/lib/actions/db.actions'
-import { FaImage } from "react-icons/fa";
-import { FaVideo } from "react-icons/fa";
+import { CiFolderOn } from "react-icons/ci";
+import { CiImageOn } from "react-icons/ci";
+import { CiVideoOn } from "react-icons/ci";
+
+
+
 
 
 const NavbarPage = () => {
@@ -44,29 +48,39 @@ const NavbarPage = () => {
     return (
         <main className='select-none bg-black '>
             <Categobar />
-            <nav className='w-full max-sm:hidden   flex p-4'>
-                <div className='flex-1 pixelify-sans'>
+            <nav className='w-full max-sm:hidden justify-around   flex p-4'>
+                <Link href={'/categorie/All'} className='max-lg:hidden  pixelify-sans py-2 px-4 font-bold flex  gap-2 items-center rounded-xl hover:text-purple-700  '>
+                    <CiImageOn size={'20'} />
+                    <p>Picutres</p>
+                </Link>
+                <div className='flex justify-center pixelify-sans'>
                     <Link href='/' className='gradient-text pl-4 font-extrabold text-3xl flex-1 '>PIXELART</Link>
                 </div>
-                <div className='flex  gap-4 text-sm max-sm:w-full justify-around  items-end'>
-                    <Link href={'/categorie/All'} className='py-2 px-4 font-bold flex  gap-2 items-center rounded-xl hover:text-purple-700  '>
-                        <FaImage size={'24'} />
-                        <p>Picutres</p>
-                    </Link>
-                    <Link href={'/categorieVideo/All'} className='py-2 px-4 font-bold  flex  gap-2 items-center rounded-xl hover:text-purple-700'>
-                        <FaVideo size={'24'} />
-                        <p>Videos</p>
-                    </Link>
-                </div>
+                <Link href={'/categorieVideo/All'} className='max-lg:hidden pixelify-sans py-2 px-4 font-bold  flex  gap-2 items-center rounded-xl hover:text-purple-700'>
+                    <CiVideoOn size={'20'} />
+                    <p>Videos</p>
+                </Link>
+                {/* <div className='flex max-lg:hidden  gap-4 text-sm  justify-around  items-end'>
+                    
+                    
+                </div> */}
             </nav>
             <div className="flex p-2 overflow-x-auto select-none gap-4 items-center scrollbar-hide">
-                <Link href={`/categorie${pathN}All`} className="transition text-zinc-400 duration-300 ease-in-out transform hover:text-purple-700 hover:scale-105 bg-black rounded-xl whitespace-nowrap">
-                    <div className="px-4 py-1 rounded-lg">All</div>
+                <Link href={`/categorie${pathN}All`} className=" border  text-sm border-zinc-500  text-zinc-400   hover:bg-zinc-900 bg-black rounded-xl whitespace-nowrap">
+                    <div className="px-4 py-1 flex items-center gap-2 rounded-lg text-sm">
+                        <CiFolderOn />
+                        <p>
+                            All
+                        </p>
+                    </div>
                 </Link>
                 {ArraySelected.map((x, index) => (
-                    <Link href={`/categorie${pathN + x}`} className="transition text-zinc-400 duration-300 ease-in-out transform hover:text-purple-700 hover:scale-105 bg-black rounded-xl whitespace-nowrap" key={index}>
-                        <div className="px-4 py-1 rounded-lg">
-                            {x}
+                    <Link href={`/categorie${pathN + x}`} className=" border border-zinc-500  text-zinc-400   hover:bg-zinc-900 bg-black rounded-xl whitespace-nowrap" key={index}>
+                        <div className="px-4 py-1 flex items-center gap-2 rounded-lg text-sm">
+                            <CiFolderOn />
+                            <p>
+                                {x}
+                            </p>
                         </div>
                     </Link>
                 ))}

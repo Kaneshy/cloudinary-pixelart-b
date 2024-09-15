@@ -1,9 +1,6 @@
-import { GrMultiple } from "react-icons/gr";
-import { FaImage } from "react-icons/fa";
-import { RiVideoAddFill } from "react-icons/ri";
-import { MdOutlineFileUpload } from "react-icons/md";
-import { FaVideo } from "react-icons/fa";
-import { IoMdCloudUpload } from "react-icons/io";
+import { CiImageOn } from "react-icons/ci";
+import { CiVideoOn } from "react-icons/ci";
+import { CiFolderOn } from "react-icons/ci";
 
 
 
@@ -50,14 +47,19 @@ export const videoCategories = [
 
 export const bottonBarC = [
     {
-        name: 'Pictures',
+        name: 'Videos',
         route: '/categorieVideo/All', 
-        logo: <FaVideo size={24}/>
+        logo: <CiVideoOn size={24}/>
     },
     {
-        name: 'Videos',
+        name: 'Pictures ',
         route: '/categorie/All', 
-        logo: <FaImage size={24}/>
+        logo: <CiImageOn size={24}/>
+    },
+    {
+        name: 'Folders',
+        route: '/profile/a', 
+        logo: <CiFolderOn size={24}/>
     }
     
 ]

@@ -11,9 +11,9 @@ const TargetsPage = ({value}) => {
                     <Link
                         href={`${x.link}`}
                         key={i}
-                        className='flex flex-col bg-neutral-1000 p-3 rounded-xl border border-neutral-800 hover:border-neutral-50'>
-                        <section className='items-center flex justify-center'>
-                            <img className='max-h-72'  src={x.imgUrl} alt="" />
+                        className='flex justify-between mb-60 flex-col bg-neutral-1000 p-3 rounded-xl border border-neutral-800 hover:border-neutral-50'>
+                        <section className='items-center bg-zinc-950 rounded-xl h-full flex justify-center'>
+                            <img className='object-contain '  src={x.imgUrl} alt="" />
                         </section>
                         <section className='flex flex-col gap-y-2 p-2'>
                             <h1 className='text-body-bold '>{x.title} </h1>

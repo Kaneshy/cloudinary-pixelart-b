@@ -153,7 +153,7 @@ const CategoriePage = ({ params }) => {
             }
         >
             <div>
-                <div className='fixed z-20 bottom-[80px] max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
+                <div className='fixed z-20  bottom-[90px] max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
                     <button
                          onClick={handleSelectedImages}
                         className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-zinc-950 max-lg:bg-black '}`}>
@@ -161,7 +161,7 @@ const CategoriePage = ({ params }) => {
                     </button>
                 </div>
                 {popupImg && (
-                    <div onClick={handleOverlayClick} className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-75">
+                    <div onClick={handleOverlayClick} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
                         <button
                             onClick={() => setpopupImg(!popupImg)}
                             className="absolute  z-50 top-2 right-2 text-white bg-white bg-opacity-60 p-2 rounded-full"

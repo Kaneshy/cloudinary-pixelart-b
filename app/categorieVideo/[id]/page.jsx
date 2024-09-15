@@ -128,7 +128,7 @@ const CategorieVideoPage = ({ params }) => {
             }
         >
             <div>
-                <div className='fixed bottom-[80px] z-20 max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
+                <div className='fixed bottom-[90px] z-20 max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
                     <button
                         onClick={handleSelectedImages}
                         className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-zinc-950 max-lg:bg-black '}`}>

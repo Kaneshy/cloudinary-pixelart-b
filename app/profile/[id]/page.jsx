@@ -10,7 +10,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 
 
 
-const StartPage = () => {
+const ProfilePage = () => {
 
     const [data, setdata] = useState([])
     const [categorie, setcategorie] = useState(true)
@@ -65,7 +65,7 @@ const StartPage = () => {
                                             key={i}
                                             className="flex relative justify-between items-center bg-neutral-1000  p-3 rounded-xl border border-neutral-800 "
                                         >
-                                            <Link href={`/categorie/${x}`} className="flex justify-between items-center w-full hover:bg-neutral-950 px-2 rounded-xl">
+                                            <Link href={`/categorie/${x}`} className="flex justify-between items-center hover:bg-neutral-950 px-2 rounded-xl">
                                                 <div className="flex items-center">
                                                     <section className="items-center rounded-xl h-full flex justify-center">
                                                         <CiFolderOn size={"30"} />
@@ -150,4 +150,4 @@ const StartPage = () => {
     )
 }
 
-export default StartPage
+export default ProfilePage
