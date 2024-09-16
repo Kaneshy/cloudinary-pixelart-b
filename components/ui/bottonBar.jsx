@@ -14,7 +14,7 @@ const BottonBar = () => {
 
   return (
     <>
-      <main className='lg:hidden text-sm z-40 bg-[#070707] backdrop-blur-md bg-opacity-90'>
+      <main className='lg:hidden z-40 text-sm  bg-[#070707] backdrop-blur-md bg-opacity-90'>
         <section className='flex p-2 justify-evenly  gap-2 w-full '>
           {bottonBarC.map((x, index) => {
             return (

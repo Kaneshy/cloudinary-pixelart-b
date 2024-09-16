@@ -12,7 +12,7 @@ const PopUpOpener = () => {
 
     return (
         <main>
-            <div className='fixed bottom-2 right-4 '>
+            <div className='fixed bottom-2  right-4 '>
                 <div>
                     <button className=' p-4 bg-zinc-950 hover:bg-zinc-900 rounded-2xl' onClick={() => setisopen(!isopen)}>
                         <FaImage  size={'24'} />
