@@ -12,12 +12,17 @@ import { ImEmbed } from 'react-icons/im';
 import { IoMdClose } from "react-icons/io";
 import { MdDelete } from 'react-icons/md';
 import { useRouter } from 'next/navigation';
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
+
+
 
 
 
 const CategoriePage = ({ params }) => {
     const [images, setImages] = useState([]);
     const [hasMore, setHasMore] = useState(true);
+    const [nextImg, setnextImg] = useState('')
     const [page, setPage] = useState(1);
     const [cursor, setCursor] = useState(null)
     const [totalCountS, settotalCountS] = useState(null)
@@ -26,8 +31,12 @@ const CategoriePage = ({ params }) => {
     const [popupImg, setpopupImg] = useState(false)
     const [imgPopUp, setimgPopUp] = useState('')
     const [revalidateH, setrevalidateH] = useState(true)
+    const [currentImg, setcurrentImg] = useState(0)
 
     const popupRef = useRef();
+
+
+
 
     useEffect(() => {
         console.log('selectedSize', selectedSize)
@@ -113,9 +122,10 @@ const CategoriePage = ({ params }) => {
         }
     };
 
-    const handlePopUpImg = (url) => {
+    const handlePopUpImg = (url, index) => {
         setimgPopUp(url)
         setpopupImg(!popupImg)
+        setcurrentImg(index)
     }
 
     const handleOverlayClick = (e) => {
@@ -143,6 +153,49 @@ const CategoriePage = ({ params }) => {
 
 
 
+
+    const handleCurrectImg = (fun) => {
+        if (images.length > 0) {
+            if (fun == 'back') {
+                if (currentImg === 0) {
+                    return
+                } else {
+                    setcurrentImg(currentImg - 1)
+                }
+
+            } else if (fun == 'forward') {
+                if (currentImg === images.length - 1) {
+                    setcurrentImg(currentImg )
+                } else {
+                    setcurrentImg(currentImg + 1)
+                    return
+                }
+            } else {
+                console.log('error popup')
+            }
+        }
+
+
+    }
+
+    useEffect(() => {
+        console.log(images.length, currentImg);
+    
+        if (images.length === 0) return; // Exit if there are no images
+    
+        if (currentImg >= images.length - 4) {
+            fetchVideos(); // Fetch videos when we reach the last image
+        }
+    
+        if (currentImg < images.length) {
+            setimgPopUp(images[currentImg].secure_url); // Set image for valid currentImg
+        }
+
+       
+
+    }, [currentImg, images]);
+
+
     return (
         <InfiniteScroll
             dataLength={images.length}
@@ -157,24 +210,41 @@ const CategoriePage = ({ params }) => {
             <div>
                 <div className='fixed   bottom-[90px] max-lg:left-6  lg:bottom-2  lg:right-[13rem]  '>
                     <button
-                         onClick={handleSelectedImages}
+                        onClick={handleSelectedImages}
                         className={`  p-4 text-white flex gap-2  rounded-2xl ${selecImgs ? 'bg-blue-700 max-lg:bg-blue-700' : 'bg-[#070707] '}`}>
                         <CiShoppingTag size={24} />
                     </button>
                 </div>
                 {popupImg && (
-                    <div onClick={handleOverlayClick} className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75">
+                    <section className='flex fixed inset-0 z-50 h-screen w-full '>
                         <button
-                            onClick={() => setpopupImg(!popupImg)}
-                            className="absolute max-sm:right-1/2 max-sm:bottom-6 bg-opacity-30  z-50 sm:top-2 right-2 text-white bg-white  p-2 rounded-full"
-                        >
-                            <IoMdClose />
-                        </button>
-                        <div ref={popupRef} className="relative">
-                            <img src={imgPopUp} alt="Popup" className="max-w-full p-2 h-screen object-contain" />
+                            ref={popupRef}
+                            onClick={() => handleCurrectImg('back')}
+                            className="absolute h-40 p-4 w-10 left-0 top-1/2 transform z-50 -translate-y-1/2  hover:text-white text-black  py-2 px-4 rounded">
+                            <IoIosArrowBack size={24} />
 
+                        </button>
+                        <div onClick={handleOverlayClick} className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-95">
+                            <button
+                                onClick={() => setpopupImg(!popupImg)}
+                                className="absolute max-sm:right-1/2 max-sm:bottom-6 bg-opacity-30  z-50 sm:top-2 right-2 text-white bg-white  p-2 rounded-full"
+                            >
+                                <IoMdClose />
+                            </button>
+                            <div ref={popupRef} className="relative z-40">
+                                <img src={imgPopUp} alt="Popup" className="max-w-full z-30  p-2 h-screen object-contain" />
+
+                            </div>
                         </div>
-                    </div>
+                        <button
+                            ref={popupRef}
+                            onClick={() => handleCurrectImg('forward')}
+                            className="absolute h-40 p-4 right-0 top-1/2 transform z-50 -translate-y-1/2  hover:text-white text-black   py-2 px-4 rounded">
+                            <IoIosArrowForward size={24} />
+
+                        </button>
+                    </section>
+
                 )}
                 <section className='hp-container p-4 max-sm:p-0'>
                     {selectedSize && selectedSize.length > 0 && (
@@ -198,7 +268,7 @@ const CategoriePage = ({ params }) => {
                                         priority={false}
                                     />
                                 </Link> */}
-                                <div onClick={() => handlePopUpImg(pId.secure_url)} className='flex-col img-content'   >
+                                <div onClick={() => handlePopUpImg(pId.secure_url, index)} className='flex-col img-content'   >
                                     {/* <img loading='lazy' src={url} alt={`Imagen ${index}`} /> */}
                                     <CldImage
                                         className='max-sm:w-full'
